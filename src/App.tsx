@@ -14,8 +14,11 @@ import EvalProp from './features/EvalProp';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import AlertDialog from './components/AlertDialog';
+import AgreementAlert from './components/AgreementAlert';
 
 function App() {
+  const [showAgreementAlert, setShowAgreementAlert] = useState(false);
+  const [firstTime, setFirstTime] = useState(0);
   const [evaluatorInfo, setEvaluatorInfo] = useState({
     id: '',
     name: '',
@@ -506,6 +509,7 @@ function App() {
         'resh7',
         encryptText(import.meta.env.VITE_PASSWORD, kpiHardValue.value_7)
       );
+    form2.append('firsttime', firstTime);
     form2.append('nexturl', window.nextUrl);
 
     for (const pair of form2.entries()) {
@@ -612,279 +616,286 @@ function App() {
       let data = await result.json();
       data = JSON.parse(data.data);
       console.log(data);
-      setSoftSkillsData({
-        soft1_input1: data.result[0].soft1_input1,
-        soft1_input2: data.result[0].soft1_input2,
-        soft1_input3: data.result[0].soft1_input3,
-        soft1_input4: data.result[0].soft1_input4,
-        soft1_input5: data.result[0].soft1_input5,
-        soft2_input1: data.result[0].soft2_input1,
-        soft2_input2: data.result[0].soft2_input2,
-        soft2_input3: data.result[0].soft2_input3,
-        soft2_input4: data.result[0].soft2_input4,
-        soft2_input5: data.result[0].soft2_input5,
-        soft3_input1: data.result[0].soft3_input1,
-        soft3_input2: data.result[0].soft3_input2,
-        soft3_input3: data.result[0].soft3_input3,
-        soft3_input4: data.result[0].soft3_input4,
-        soft3_input5: data.result[0].soft3_input5,
-        soft4_input1: data.result[0].soft4_input1,
-        soft4_input2: data.result[0].soft4_input2,
-        soft4_input3: data.result[0].soft4_input3,
-        soft4_input4: data.result[0].soft4_input4,
-        soft4_input5: data.result[0].soft4_input5,
-        soft5_input1: data.result[0].soft5_input1,
-        soft5_input2: data.result[0].soft5_input2,
-        soft5_input3: data.result[0].soft5_input3,
-        soft5_input4: data.result[0].soft5_input4,
-        soft5_input5: data.result[0].soft5_input5,
-      });
-      setKpiHard({
-        kpi_1: decodeURIComponent(data.result[0].kpiHard_1),
-        kpi_2: decodeURIComponent(data.result[0].kpiHard_2),
-        kpi_3: decodeURIComponent(data.result[0].kpiHard_3),
-        kpi_4: decodeURIComponent(data.result[0].kpiHard_4),
-        kpi_5: decodeURIComponent(data.result[0].kpiHard_5),
-        kpi_6: decodeURIComponent(data.result[0].kpiHard_6),
-        kpi_7: decodeURIComponent(data.result[0].kpiHard_7),
-      });
-      setKpiHardValue({
-        value_1: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_1
-        ),
-        value_2: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_2
-        ),
-        value_3: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_3
-        ),
-        value_4: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_4
-        ),
-        value_5: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_5
-        ),
-        value_6: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_6
-        ),
-        value_7: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].resh_7
-        ),
-      });
-      setKpiWeight({
-        weight_1: data.result[0].weight_1,
-        weight_2: data.result[0].weight_2,
-        weight_3: data.result[0].weight_3,
-        weight_4: data.result[0].weight_4,
-        weight_5: data.result[0].weight_5,
-        weight_6: data.result[0].weight_6,
-        weight_7: data.result[0].weight_7,
-      });
-      setSoftParagraphValue({
-        item_11: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res1_input1
-        ),
-        item_12: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res1_input2
-        ),
-        item_13: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res1_input3
-        ),
-        item_14: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res1_input4
-        ),
-        item_15: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res1_input5
-        ),
-        item_21: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res2_input1
-        ),
-        item_22: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res2_input2
-        ),
-        item_23: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res2_input3
-        ),
-        item_24: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res2_input4
-        ),
-        item_25: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res2_input5
-        ),
-        item_31: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res3_input1
-        ),
-        item_32: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res3_input2
-        ),
-        item_33: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res3_input3
-        ),
-        item_34: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res3_input4
-        ),
-        item_35: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res3_input5
-        ),
-        item_41: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res4_input1
-        ),
-        item_42: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res4_input2
-        ),
-        item_43: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res4_input3
-        ),
-        item_44: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res4_input4
-        ),
-        item_45: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res4_input5
-        ),
-        item_51: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res5_input1
-        ),
-        item_52: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res5_input2
-        ),
-        item_53: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res5_input3
-        ),
-        item_54: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res5_input4
-        ),
-        item_55: decryptText(
-          import.meta.env.VITE_PASSWORD,
-          data.result[0].res5_input5
-        ),
-      });
 
-      setSoftKPINotesSL({
-        item_11: data.result[0].noteItem_11,
-        item_12: data.result[0].noteItem_12,
-        item_13: data.result[0].noteItem_13,
-        item_14: data.result[0].noteItem_14,
-        item_15: data.result[0].noteItem_15,
-        item_21: data.result[0].noteItem_21,
-        item_22: data.result[0].noteItem_22,
-        item_23: data.result[0].noteItem_23,
-        item_24: data.result[0].noteItem_24,
-        item_25: data.result[0].noteItem_25,
-        item_31: data.result[0].noteItem_31,
-        item_32: data.result[0].noteItem_32,
-        item_33: data.result[0].noteItem_33,
-        item_34: data.result[0].noteItem_34,
-        item_35: data.result[0].noteItem_35,
-        item_41: data.result[0].noteItem_41,
-        item_42: data.result[0].noteItem_42,
-        item_43: data.result[0].noteItem_43,
-        item_44: data.result[0].noteItem_44,
-        item_45: data.result[0].noteItem_45,
-        item_51: data.result[0].noteItem_51,
-        item_52: data.result[0].noteItem_52,
-        item_53: data.result[0].noteItem_53,
-        item_54: data.result[0].noteItem_54,
-        item_55: data.result[0].noteItem_55,
-      });
-      setSoftKPINotesEmployee({
-        item_11: data.result[0].noteItemEmpl_11,
-        item_12: data.result[0].noteItemEmpl_12,
-        item_13: data.result[0].noteItemEmpl_13,
-        item_14: data.result[0].noteItemEmpl_14,
-        item_15: data.result[0].noteItemEmpl_15,
-        item_21: data.result[0].noteItemEmpl_21,
-        item_22: data.result[0].noteItemEmpl_22,
-        item_23: data.result[0].noteItemEmpl_23,
-        item_24: data.result[0].noteItemEmpl_24,
-        item_25: data.result[0].noteItemEmpl_25,
-        item_31: data.result[0].noteItemEmpl_31,
-        item_32: data.result[0].noteItemEmpl_32,
-        item_33: data.result[0].noteItemEmpl_33,
-        item_34: data.result[0].noteItemEmpl_34,
-        item_35: data.result[0].noteItemEmpl_35,
-        item_41: data.result[0].noteItemEmpl_41,
-        item_42: data.result[0].noteItemEmpl_42,
-        item_43: data.result[0].noteItemEmpl_43,
-        item_44: data.result[0].noteItemEmpl_44,
-        item_45: data.result[0].noteItemEmpl_45,
-        item_51: data.result[0].noteItemEmpl_51,
-        item_52: data.result[0].noteItemEmpl_52,
-        item_53: data.result[0].noteItemEmpl_53,
-        item_54: data.result[0].noteItemEmpl_54,
-        item_55: data.result[0].noteItemEmpl_55,
-      });
+      if (data.result.length > 1) {
+        setSoftSkillsData({
+          soft1_input1: data.result[0].soft1_input1,
+          soft1_input2: data.result[0].soft1_input2,
+          soft1_input3: data.result[0].soft1_input3,
+          soft1_input4: data.result[0].soft1_input4,
+          soft1_input5: data.result[0].soft1_input5,
+          soft2_input1: data.result[0].soft2_input1,
+          soft2_input2: data.result[0].soft2_input2,
+          soft2_input3: data.result[0].soft2_input3,
+          soft2_input4: data.result[0].soft2_input4,
+          soft2_input5: data.result[0].soft2_input5,
+          soft3_input1: data.result[0].soft3_input1,
+          soft3_input2: data.result[0].soft3_input2,
+          soft3_input3: data.result[0].soft3_input3,
+          soft3_input4: data.result[0].soft3_input4,
+          soft3_input5: data.result[0].soft3_input5,
+          soft4_input1: data.result[0].soft4_input1,
+          soft4_input2: data.result[0].soft4_input2,
+          soft4_input3: data.result[0].soft4_input3,
+          soft4_input4: data.result[0].soft4_input4,
+          soft4_input5: data.result[0].soft4_input5,
+          soft5_input1: data.result[0].soft5_input1,
+          soft5_input2: data.result[0].soft5_input2,
+          soft5_input3: data.result[0].soft5_input3,
+          soft5_input4: data.result[0].soft5_input4,
+          soft5_input5: data.result[0].soft5_input5,
+        });
+        setKpiHard({
+          kpi_1: decodeURIComponent(data.result[0].kpiHard_1),
+          kpi_2: decodeURIComponent(data.result[0].kpiHard_2),
+          kpi_3: decodeURIComponent(data.result[0].kpiHard_3),
+          kpi_4: decodeURIComponent(data.result[0].kpiHard_4),
+          kpi_5: decodeURIComponent(data.result[0].kpiHard_5),
+          kpi_6: decodeURIComponent(data.result[0].kpiHard_6),
+          kpi_7: decodeURIComponent(data.result[0].kpiHard_7),
+        });
+        setKpiHardValue({
+          value_1: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_1
+          ),
+          value_2: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_2
+          ),
+          value_3: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_3
+          ),
+          value_4: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_4
+          ),
+          value_5: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_5
+          ),
+          value_6: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_6
+          ),
+          value_7: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].resh_7
+          ),
+        });
+        setKpiWeight({
+          weight_1: data.result[0].weight_1,
+          weight_2: data.result[0].weight_2,
+          weight_3: data.result[0].weight_3,
+          weight_4: data.result[0].weight_4,
+          weight_5: data.result[0].weight_5,
+          weight_6: data.result[0].weight_6,
+          weight_7: data.result[0].weight_7,
+        });
+        setSoftParagraphValue({
+          item_11: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res1_input1
+          ),
+          item_12: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res1_input2
+          ),
+          item_13: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res1_input3
+          ),
+          item_14: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res1_input4
+          ),
+          item_15: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res1_input5
+          ),
+          item_21: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res2_input1
+          ),
+          item_22: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res2_input2
+          ),
+          item_23: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res2_input3
+          ),
+          item_24: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res2_input4
+          ),
+          item_25: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res2_input5
+          ),
+          item_31: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res3_input1
+          ),
+          item_32: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res3_input2
+          ),
+          item_33: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res3_input3
+          ),
+          item_34: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res3_input4
+          ),
+          item_35: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res3_input5
+          ),
+          item_41: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res4_input1
+          ),
+          item_42: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res4_input2
+          ),
+          item_43: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res4_input3
+          ),
+          item_44: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res4_input4
+          ),
+          item_45: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res4_input5
+          ),
+          item_51: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res5_input1
+          ),
+          item_52: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res5_input2
+          ),
+          item_53: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res5_input3
+          ),
+          item_54: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res5_input4
+          ),
+          item_55: decryptText(
+            import.meta.env.VITE_PASSWORD,
+            data.result[0].res5_input5
+          ),
+        });
 
-      setHardKPINotesEmployee({
-        item_11: decodeURIComponent(data.result[0].cmhe_11),
-        item_13: decodeURIComponent(data.result[0].cmhe_13),
-        item_21: decodeURIComponent(data.result[0].cmhe_21),
-        item_23: decodeURIComponent(data.result[0].cmhe_23),
-        item_31: decodeURIComponent(data.result[0].cmhe_31),
-        item_33: decodeURIComponent(data.result[0].cmhe_33),
-        item_41: decodeURIComponent(data.result[0].cmhe_41),
-        item_43: decodeURIComponent(data.result[0].cmhe_43),
-        item_51: decodeURIComponent(data.result[0].cmhe_51),
-        item_53: decodeURIComponent(data.result[0].cmhe_53),
-        item_61: decodeURIComponent(data.result[0].cmhe_61),
-        item_63: decodeURIComponent(data.result[0].cmhe_63),
-        item_71: decodeURIComponent(data.result[0].cmhe_71),
-        item_73: decodeURIComponent(data.result[0].cmhe_73),
-      });
+        setSoftKPINotesSL({
+          item_11: data.result[0].noteItem_11,
+          item_12: data.result[0].noteItem_12,
+          item_13: data.result[0].noteItem_13,
+          item_14: data.result[0].noteItem_14,
+          item_15: data.result[0].noteItem_15,
+          item_21: data.result[0].noteItem_21,
+          item_22: data.result[0].noteItem_22,
+          item_23: data.result[0].noteItem_23,
+          item_24: data.result[0].noteItem_24,
+          item_25: data.result[0].noteItem_25,
+          item_31: data.result[0].noteItem_31,
+          item_32: data.result[0].noteItem_32,
+          item_33: data.result[0].noteItem_33,
+          item_34: data.result[0].noteItem_34,
+          item_35: data.result[0].noteItem_35,
+          item_41: data.result[0].noteItem_41,
+          item_42: data.result[0].noteItem_42,
+          item_43: data.result[0].noteItem_43,
+          item_44: data.result[0].noteItem_44,
+          item_45: data.result[0].noteItem_45,
+          item_51: data.result[0].noteItem_51,
+          item_52: data.result[0].noteItem_52,
+          item_53: data.result[0].noteItem_53,
+          item_54: data.result[0].noteItem_54,
+          item_55: data.result[0].noteItem_55,
+        });
+        setSoftKPINotesEmployee({
+          item_11: data.result[0].noteItemEmpl_11,
+          item_12: data.result[0].noteItemEmpl_12,
+          item_13: data.result[0].noteItemEmpl_13,
+          item_14: data.result[0].noteItemEmpl_14,
+          item_15: data.result[0].noteItemEmpl_15,
+          item_21: data.result[0].noteItemEmpl_21,
+          item_22: data.result[0].noteItemEmpl_22,
+          item_23: data.result[0].noteItemEmpl_23,
+          item_24: data.result[0].noteItemEmpl_24,
+          item_25: data.result[0].noteItemEmpl_25,
+          item_31: data.result[0].noteItemEmpl_31,
+          item_32: data.result[0].noteItemEmpl_32,
+          item_33: data.result[0].noteItemEmpl_33,
+          item_34: data.result[0].noteItemEmpl_34,
+          item_35: data.result[0].noteItemEmpl_35,
+          item_41: data.result[0].noteItemEmpl_41,
+          item_42: data.result[0].noteItemEmpl_42,
+          item_43: data.result[0].noteItemEmpl_43,
+          item_44: data.result[0].noteItemEmpl_44,
+          item_45: data.result[0].noteItemEmpl_45,
+          item_51: data.result[0].noteItemEmpl_51,
+          item_52: data.result[0].noteItemEmpl_52,
+          item_53: data.result[0].noteItemEmpl_53,
+          item_54: data.result[0].noteItemEmpl_54,
+          item_55: data.result[0].noteItemEmpl_55,
+        });
 
-      setHardKPINotesSL({
-        item_11: decodeURIComponent(data.result[0].cmhl_11),
-        item_13: decodeURIComponent(data.result[0].cmhl_13),
-        item_21: decodeURIComponent(data.result[0].cmhl_21),
-        item_23: decodeURIComponent(data.result[0].cmhl_23),
-        item_31: decodeURIComponent(data.result[0].cmhl_31),
-        item_33: decodeURIComponent(data.result[0].cmhl_33),
-        item_41: decodeURIComponent(data.result[0].cmhl_41),
-        item_43: decodeURIComponent(data.result[0].cmhl_43),
-        item_51: decodeURIComponent(data.result[0].cmhl_51),
-        item_53: decodeURIComponent(data.result[0].cmhl_53),
-        item_61: decodeURIComponent(data.result[0].cmhl_61),
-        item_63: decodeURIComponent(data.result[0].cmhl_63),
-        item_71: decodeURIComponent(data.result[0].cmhl_71),
-        item_73: decodeURIComponent(data.result[0].cmhl_73),
-      });
+        setHardKPINotesEmployee({
+          item_11: decodeURIComponent(data.result[0].cmhe_11),
+          item_13: decodeURIComponent(data.result[0].cmhe_13),
+          item_21: decodeURIComponent(data.result[0].cmhe_21),
+          item_23: decodeURIComponent(data.result[0].cmhe_23),
+          item_31: decodeURIComponent(data.result[0].cmhe_31),
+          item_33: decodeURIComponent(data.result[0].cmhe_33),
+          item_41: decodeURIComponent(data.result[0].cmhe_41),
+          item_43: decodeURIComponent(data.result[0].cmhe_43),
+          item_51: decodeURIComponent(data.result[0].cmhe_51),
+          item_53: decodeURIComponent(data.result[0].cmhe_53),
+          item_61: decodeURIComponent(data.result[0].cmhe_61),
+          item_63: decodeURIComponent(data.result[0].cmhe_63),
+          item_71: decodeURIComponent(data.result[0].cmhe_71),
+          item_73: decodeURIComponent(data.result[0].cmhe_73),
+        });
 
-      setEvaluatorInfo({
-        id: data.result[0].evaluatorId,
-        name: data.result[0].evaluatorName,
-        dep: data.result[0].evaluatorDep,
-        title: data.result[0].evaluatorTitle,
-      });
+        setHardKPINotesSL({
+          item_11: decodeURIComponent(data.result[0].cmhl_11),
+          item_13: decodeURIComponent(data.result[0].cmhl_13),
+          item_21: decodeURIComponent(data.result[0].cmhl_21),
+          item_23: decodeURIComponent(data.result[0].cmhl_23),
+          item_31: decodeURIComponent(data.result[0].cmhl_31),
+          item_33: decodeURIComponent(data.result[0].cmhl_33),
+          item_41: decodeURIComponent(data.result[0].cmhl_41),
+          item_43: decodeURIComponent(data.result[0].cmhl_43),
+          item_51: decodeURIComponent(data.result[0].cmhl_51),
+          item_53: decodeURIComponent(data.result[0].cmhl_53),
+          item_61: decodeURIComponent(data.result[0].cmhl_61),
+          item_63: decodeURIComponent(data.result[0].cmhl_63),
+          item_71: decodeURIComponent(data.result[0].cmhl_71),
+          item_73: decodeURIComponent(data.result[0].cmhl_73),
+        });
+        setEvaluatorInfo({
+          id: data.result[0].evaluatorId,
+          name: data.result[0].evaluatorName,
+          dep: data.result[0].evaluatorDep,
+          title: data.result[0].evaluatorTitle,
+        });
+
+        const first = localStorage.getItem('firstTime');
+        if (first !== '1' && window.checkFirst === true) {
+          setShowAgreementAlert(true);
+        }
+      }
     };
 
     // const generateKey = async () => {
@@ -1290,7 +1301,7 @@ function App() {
     <>
       <EmployeeInfo evaluatorInfo={evaluatorInfo} />
       {window.currentRole === 'EMPLOYEE' && (
-        <div style={{ overflowX: 'auto', width: '100%' }}>
+        <div>
           <table className="mainTable marginBottom">
             <thead>
               <tr className="table-row">
@@ -1617,6 +1628,14 @@ function App() {
         loading={loading}
         success={success}
         handleClose={() => setOpen(false)}
+      />
+      <AgreementAlert
+        open={showAgreementAlert}
+        handleClose={() => {
+          setShowAgreementAlert(false);
+          localStorage.setItem('firstTime', 1);
+          setFirstTime(1);
+        }}
       />
     </>
   );

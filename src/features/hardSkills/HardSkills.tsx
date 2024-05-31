@@ -176,6 +176,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_1}
               onChange={e => handleSoftParagraph(e.target.value, 1)}
               className="select--criteria-hard select--criteria-hard-1 select--criteria-hard-11"
@@ -244,6 +245,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_2}
               onChange={e => handleSoftParagraph(e.target.value, 2)}
               className="select--criteria-hard select--criteria-hard-2 select--criteria-hard-22"
@@ -312,6 +314,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_3}
               onChange={e => handleSoftParagraph(e.target.value, 3)}
               className="select--criteria-hard select--criteria-hard-3 select--criteria-hard-33"
@@ -380,6 +383,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_4}
               onChange={e => handleSoftParagraph(e.target.value, 4)}
               className="select--criteria-hard select--criteria-hard-4 select--criteria-hard-44"
@@ -448,6 +452,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_5}
               onChange={e => handleSoftParagraph(e.target.value, 5)}
               className="select--criteria-hard select--criteria-hard-5 select--criteria-hard-55"
@@ -516,6 +521,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_6}
               onChange={e => handleSoftParagraph(e.target.value, 6)}
               className="select--criteria-hard select--criteria-hard-5 select--criteria-hard-55"
@@ -584,6 +590,7 @@ export default function HardSkills({
             <select
               name="select--criteria-hard"
               id="select--id"
+              disabled={true}
               value={kpiHardValue.value_7}
               onChange={e => handleSoftParagraph(e.target.value, 7)}
               className="select--criteria-hard select--criteria-hard-5 select--criteria-hard-55"

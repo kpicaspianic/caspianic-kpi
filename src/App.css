@@ -749,7 +749,7 @@
 .first {
   position: sticky;
   left: 0;
-  z-index: 10000;
+  /* z-index: 10000; */
   background-color: #fff;
   /* background-color: #ccc; */
   /* border-color: #494949; */
