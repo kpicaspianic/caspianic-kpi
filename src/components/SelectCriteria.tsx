@@ -37,7 +37,6 @@ export const SelectCriteria = ({ res, number, setParagraph }) => {
       <select
         name="select--criteria"
         id={number}
-        disabled={true}
         className="select--criteria select--criteria-1"
         onChange={e => handleSoftParagraph(e.target.value, number)}
       >

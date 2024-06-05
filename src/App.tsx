@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import AlertDialog from './components/AlertDialog';
 import AgreementAlert from './components/AgreementAlert';
+import HeaderComponent from './features/HeaderComponent';
 
 function App() {
   const [showAgreementAlert, setShowAgreementAlert] = useState(false);
@@ -446,6 +447,13 @@ function App() {
     form2.append('evperiod', '01-05-2024 : 31-10-2024');
     form2.append('status', 'assigned');
     form2.append('type', '');
+    form2.append('kpi1', encodeURIComponent(kpiHard.kpi_1));
+    form2.append('kpi2', encodeURIComponent(kpiHard.kpi_2));
+    form2.append('kpi3', encodeURIComponent(kpiHard.kpi_3));
+    form2.append('kpi4', encodeURIComponent(kpiHard.kpi_4));
+    form2.append('kpi5', encodeURIComponent(kpiHard.kpi_5));
+    form2.append('kpi6', encodeURIComponent(kpiHard.kpi_6));
+    form2.append('kpi7', encodeURIComponent(kpiHard.kpi_7));
     form2.append('cmhe11', encodeURIComponent(hardKPINotesEmployee.item_11));
     form2.append('cmhe13', encodeURIComponent(hardKPINotesEmployee.item_13));
     form2.append('cmhe21', encodeURIComponent(hardKPINotesEmployee.item_21));
@@ -1299,6 +1307,7 @@ function App() {
 
   return (
     <>
+      <HeaderComponent />
       <EmployeeInfo evaluatorInfo={evaluatorInfo} />
       {window.currentRole === 'EMPLOYEE' && (
         <div>

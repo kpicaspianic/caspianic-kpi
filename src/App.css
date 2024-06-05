@@ -873,3 +873,21 @@ td {
 /* td {
   height: 20px;
 } */
+
+.header_comp {
+  display: flex;
+  align-items: center;
+  margin: 20px 60px 20px 60px;
+  justify-content: space-between;
+}
+
+.header_comp img {
+  width: 130px;
+  height: 50px;
+}
+
+.header_comp h1 {
+  font-size: 24px;
+  margin: 0;
+  text-transform: uppercase;
+}
