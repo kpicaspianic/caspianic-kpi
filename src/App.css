@@ -8,6 +8,12 @@
   text-align: center;
 } */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #LLOuterContainer {
   background-color: #fff;
   overflow-x: hidden;
@@ -23,7 +29,7 @@
   margin-top: 30px;
   font-weight: 500;
   position: relative;
-  background-color: #fff;
+  background-color: #f6f6f6;
   /* overflow: scroll; */
 }
 .data {
@@ -51,7 +57,6 @@
   border-bottom: 1px solid #c6cccc;
   padding: 10px 15px;
   position: relative;
-  background-color: #fff;
   font-size: 12px;
   width: 30px;
 }
@@ -271,7 +276,7 @@
 
 .textareas {
   resize: none;
-  border: none;
+  /* border: none; */
   outline: none;
 }
 
@@ -315,6 +320,13 @@
   border: 1px solid #cecece;
   height: 25px;
   border-radius: 5px;
+}
+
+.select-antd {
+  width: 60%;
+  margin-left: 5px;
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 .select-div {
@@ -750,7 +762,8 @@
   position: sticky;
   left: 0;
   /* z-index: 10000; */
-  background-color: #fff;
+  background-color: #f6f6f6;
+  z-index: 1;
   /* background-color: #ccc; */
   /* border-color: #494949; */
   /* color: #fcfcfc; */
@@ -796,6 +809,7 @@ td {
   text-align: center;
   font-size: 11px;
   font-style: italic;
+  color: #979797;
   /* padding: 4px; */
   /* height: 100%; */
 }
@@ -813,7 +827,7 @@ td {
 
 .performance-text textarea {
   flex: 1;
-  border: none;
+  /* border: none; */
   resize: vertical;
   /* min-height: 100%; */
   padding: 3px 5px;
@@ -890,4 +904,12 @@ td {
   font-size: 24px;
   margin: 0;
   text-transform: uppercase;
+}
+
+.not-allowed {
+  cursor: not-allowed;
+}
+
+.textarea-antd {
+  margin: 3px;
 }

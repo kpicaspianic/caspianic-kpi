@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Select } from 'antd';
 
 export const SelectCriteria = ({ res, number, setParagraph }) => {
   const setCorrectParagraph = (value: string) => {
@@ -28,13 +29,22 @@ export const SelectCriteria = ({ res, number, setParagraph }) => {
     }));
   };
 
+  const options = [
+    { value: '0', label: 'Choose an item' },
+    { value: '1', label: 'Qəbulolunmaz fəaliyyət nümayiş etdirir' },
+    { value: '2', label: 'Təkmilləşməyə ehtiyac duyulur' },
+    { value: '3', label: 'Qəbulolunan fəaliyyət nümayiş etdirirr' },
+    { value: '4', label: 'Işin öhdəsindən lazımınca gəlir' },
+    { value: '5', label: 'Gözləntiləri davamlı olaraq üstələyir' },
+  ];
+
   useEffect(() => {
     setParagraphValue(() => setCorrectParagraph(res));
   }, [res]);
 
   return (
     <div className="select-div">
-      <select
+      {/* <select
         name="select--criteria"
         id={number}
         className="select--criteria select--criteria-1"
@@ -56,7 +66,13 @@ export const SelectCriteria = ({ res, number, setParagraph }) => {
         <option value="5" selected={res === '5'}>
           Gözləntiləri davamlı olaraq üstələyir
         </option>
-      </select>
+      </select> */}
+      <Select
+        className="select-antd"
+        options={options}
+        onChange={value => handleSoftParagraph(value, number)}
+        id={number}
+      />
       <p className="data--paragraph-1 data--paragraph">{paragraphValue}</p>
     </div>
   );

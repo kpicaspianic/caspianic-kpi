@@ -16,6 +16,7 @@ import axios from 'axios';
 import AlertDialog from './components/AlertDialog';
 import AgreementAlert from './components/AgreementAlert';
 import HeaderComponent from './features/HeaderComponent';
+import { Input } from 'antd';
 
 function App() {
   const [showAgreementAlert, setShowAgreementAlert] = useState(false);
@@ -211,6 +212,8 @@ function App() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const { TextArea } = Input;
 
   const sendData = async () => {
     console.log(hardKPINotesSL);
@@ -1396,21 +1399,7 @@ function App() {
                       </td>
                       <td>
                         <div className="performance-text">
-                          <textarea
-                            name="1"
-                            id={el.slNote[`item_${idx + 1}1`]}
-                            onChange={e => {
-                              setSoftKPINotesSL(prevValue => ({
-                                ...prevValue,
-                                [`item_${idx + 1}1`]: e.target.value,
-                              }));
-                            }}
-                            defaultValue={el.slNote[`item_${idx + 1}1`]}
-                          >
-                            {/* {el.slNote[`item_${idx + 1}1`]} */}
-                          </textarea>
-                          <div className="vertical-line"></div>
-                          <textarea
+                          <TextArea
                             name="1"
                             id={el.emplNote[`item_${idx + 1}1`]}
                             onChange={e => {
@@ -1420,7 +1409,37 @@ function App() {
                               }));
                             }}
                             defaultValue={el.emplNote[`item_${idx + 1}1`]}
-                          ></textarea>
+                            readOnly={
+                              window.currentRole === 'MANAGER' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'MANAGER'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
+                          <div className="vertical-line"></div>
+                          <TextArea
+                            name="1"
+                            id={el.slNote[`item_${idx + 1}1`]}
+                            onChange={e => {
+                              setSoftKPINotesSL(prevValue => ({
+                                ...prevValue,
+                                [`item_${idx + 1}1`]: e.target.value,
+                              }));
+                            }}
+                            defaultValue={el.slNote[`item_${idx + 1}1`]}
+                            readOnly={
+                              window.currentRole === 'EMPLOYEE' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'EMPLOYEE'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
                         </div>
                       </td>
                       <td>
@@ -1438,19 +1457,7 @@ function App() {
                       </td>
                       <td>
                         <div className="performance-text">
-                          <textarea
-                            name="2"
-                            id={el.slNote[`item_${idx + 1}2`]}
-                            onChange={e => {
-                              setSoftKPINotesSL(prevValue => ({
-                                ...prevValue,
-                                [`item_${idx + 1}2`]: e.target.value,
-                              }));
-                            }}
-                            defaultValue={el.slNote[`item_${idx + 1}2`]}
-                          ></textarea>
-                          <div className="vertical-line"></div>
-                          <textarea
+                          <TextArea
                             name="2"
                             id=""
                             onChange={e => {
@@ -1460,7 +1467,37 @@ function App() {
                               }));
                             }}
                             defaultValue={el.emplNote[`item_${idx + 1}2`]}
-                          ></textarea>
+                            readOnly={
+                              window.currentRole === 'MANAGER' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'MANAGER'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
+                          <div className="vertical-line"></div>
+                          <TextArea
+                            name="2"
+                            id={el.slNote[`item_${idx + 1}2`]}
+                            onChange={e => {
+                              setSoftKPINotesSL(prevValue => ({
+                                ...prevValue,
+                                [`item_${idx + 1}2`]: e.target.value,
+                              }));
+                            }}
+                            defaultValue={el.slNote[`item_${idx + 1}2`]}
+                            readOnly={
+                              window.currentRole === 'EMPLOYEE' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'EMPLOYEE'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
                         </div>
                       </td>
                       <td>
@@ -1480,19 +1517,7 @@ function App() {
                       </td>
                       <td>
                         <div className="performance-text">
-                          <textarea
-                            name=""
-                            id={`item_${idx + 1}`}
-                            onChange={e => {
-                              setSoftKPINotesSL(prevValue => ({
-                                ...prevValue,
-                                [`item_${idx + 1}3`]: e.target.value,
-                              }));
-                            }}
-                            defaultValue={el.slNote[`item_${idx + 1}3`]}
-                          ></textarea>
-                          <div className="vertical-line"></div>
-                          <textarea
+                          <TextArea
                             name=""
                             id=""
                             onChange={e => {
@@ -1502,7 +1527,37 @@ function App() {
                               }));
                             }}
                             defaultValue={el.emplNote[`item_${idx + 1}3`]}
-                          ></textarea>
+                            readOnly={
+                              window.currentRole === 'MANAGER' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'MANAGER'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
+                          <div className="vertical-line"></div>
+                          <TextArea
+                            name=""
+                            id={`item_${idx + 1}`}
+                            onChange={e => {
+                              setSoftKPINotesSL(prevValue => ({
+                                ...prevValue,
+                                [`item_${idx + 1}3`]: e.target.value,
+                              }));
+                            }}
+                            defaultValue={el.slNote[`item_${idx + 1}3`]}
+                            readOnly={
+                              window.currentRole === 'EMPLOYEE' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'EMPLOYEE'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
                         </div>
                       </td>
                       <td>
@@ -1522,19 +1577,7 @@ function App() {
                       </td>
                       <td>
                         <div className="performance-text">
-                          <textarea
-                            name=""
-                            id={`item_${idx + 1}`}
-                            onChange={e => {
-                              setSoftKPINotesSL(prevValue => ({
-                                ...prevValue,
-                                [`item_${idx + 1}4`]: e.target.value,
-                              }));
-                            }}
-                            defaultValue={el.slNote[`item_${idx + 1}4`]}
-                          ></textarea>
-                          <div className="vertical-line"></div>
-                          <textarea
+                          <TextArea
                             name=""
                             id=""
                             onChange={e => {
@@ -1544,7 +1587,37 @@ function App() {
                               }));
                             }}
                             defaultValue={el.emplNote[`item_${idx + 1}4`]}
-                          ></textarea>
+                            readOnly={
+                              window.currentRole === 'MANAGER' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'MANAGER'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
+                          <div className="vertical-line"></div>
+                          <TextArea
+                            name=""
+                            id={`item_${idx + 1}`}
+                            onChange={e => {
+                              setSoftKPINotesSL(prevValue => ({
+                                ...prevValue,
+                                [`item_${idx + 1}4`]: e.target.value,
+                              }));
+                            }}
+                            defaultValue={el.slNote[`item_${idx + 1}4`]}
+                            readOnly={
+                              window.currentRole === 'EMPLOYEE' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'EMPLOYEE'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
                         </div>
                       </td>
                       <td>
@@ -1564,19 +1637,7 @@ function App() {
                       </td>
                       <td>
                         <div className="performance-text">
-                          <textarea
-                            name=""
-                            id={`item_${idx + 1}`}
-                            onChange={e => {
-                              setSoftKPINotesSL(prevValue => ({
-                                ...prevValue,
-                                [`item_${idx + 1}5`]: e.target.value,
-                              }));
-                            }}
-                            defaultValue={el.slNote[`item_${idx + 1}5`]}
-                          ></textarea>
-                          <div className="vertical-line"></div>
-                          <textarea
+                          <TextArea
                             name=""
                             id=""
                             onChange={e => {
@@ -1586,7 +1647,37 @@ function App() {
                               }));
                             }}
                             defaultValue={el.emplNote[`item_${idx + 1}5`]}
-                          ></textarea>
+                            readOnly={
+                              window.currentRole === 'MANAGER' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'MANAGER'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
+                          <div className="vertical-line"></div>
+                          <TextArea
+                            name=""
+                            id={`item_${idx + 1}`}
+                            onChange={e => {
+                              setSoftKPINotesSL(prevValue => ({
+                                ...prevValue,
+                                [`item_${idx + 1}5`]: e.target.value,
+                              }));
+                            }}
+                            defaultValue={el.slNote[`item_${idx + 1}5`]}
+                            readOnly={
+                              window.currentRole === 'EMPLOYEE' ? true : false
+                            }
+                            className={
+                              window.currentRole === 'EMPLOYEE'
+                                ? 'not-allowed textarea-antd'
+                                : 'textarea-antd'
+                            }
+                            autoSize={{ minRows: 4 }}
+                          />
                         </div>
                       </td>
                       <td>
