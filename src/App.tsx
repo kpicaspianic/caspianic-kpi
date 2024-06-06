@@ -6,7 +6,7 @@ import { SelectCriteria } from './components/SelectCriteria';
 import { handleAuth } from './utils/auth';
 import { decryptText, encryptText } from './utils/encode';
 import { useState, useEffect } from 'react';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import HardSkills from './features/hardSkills/HardSkills';
 import AdditionalNotes from './features/AdditionalNotes';
 import QualityEvaluation from './features/QualityEvaluation';
@@ -212,6 +212,7 @@ function App() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
+  const myRef = useRef(null);
 
   const { TextArea } = Input;
 
