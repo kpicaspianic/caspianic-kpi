@@ -7,5 +7,7 @@ declare global {
     baseUrl: string;
     OTCSTicket: string;
     currentUserId: number;
+    currentRole: string;
+    checkFirst: boolean;
   }
 }

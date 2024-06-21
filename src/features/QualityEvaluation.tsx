@@ -1,3 +1,6 @@
+import TextArea from 'antd/es/input/TextArea';
+import { BadgeInfo } from 'lucide-react';
+
 export default function QualityEvaluation() {
   return (
     <div className="quality-eval">
@@ -6,14 +9,17 @@ export default function QualityEvaluation() {
           <label className="quality-eval--label" id="">
             Güclü tərəflər:
           </label>
-          <textarea
-            className="quality-eval--textarea strong-areas"
+          <TextArea
+            className={`quality-eval--textarea ${
+              window.currentRole === 'MANAGER' ? '' : 'not-allowed'
+            }`}
+            readOnly={window.currentRole === 'MANAGER' ? false : true}
             id=""
-            rows={6}
-          ></textarea>
+            autoSize={{ minRows: 4 }}
+          />
         </div>
         <div className="quality-eval--div">
-          <i className="fas fa-info-circle inline"></i>
+          <BadgeInfo color="#ff0000" size={16} />
           <p className="quality-eval--info">
             Zəhmət olmasa bu bölməni qiymətləndirmənin sonlarında doldurun
           </p>
@@ -24,14 +30,17 @@ export default function QualityEvaluation() {
           <label className="quality-eval--label" id="">
             Təkmilləşdirməyə ehtiyac olan sahələr:
           </label>
-          <textarea
-            className="quality-eval--textarea improvements"
+          <TextArea
+            className={`quality-eval--textarea ${
+              window.currentRole === 'MANAGER' ? '' : 'not-allowed'
+            }`}
+            readOnly={window.currentRole === 'MANAGER' ? false : true}
             id=""
-            rows={6}
-          ></textarea>
+            autoSize={{ minRows: 4 }}
+          />
         </div>
         <div className="quality-eval--div">
-          <i className="fas fa-info-circle inline"></i>
+          <BadgeInfo color="#ff0000" size={16} />
           <p className="quality-eval--info">
             Zəhmət olmasa bu bölməni qiymətləndirmənin sonlarında doldurun
           </p>

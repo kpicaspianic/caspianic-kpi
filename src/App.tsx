@@ -1,16 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import './App.css';
 import { EmployeeInfo } from './features/EmployeeInfo';
 import { SelectCriteria } from './components/SelectCriteria';
 import { handleAuth } from './utils/auth';
 import { decryptText, encryptText } from './utils/encode';
-import { useState, useEffect } from 'react';
-import { Fragment, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Fragment } from 'react';
 import HardSkills from './features/hardSkills/HardSkills';
 import AdditionalNotes from './features/AdditionalNotes';
 import QualityEvaluation from './features/QualityEvaluation';
-import EvalProp from './features/EvalProp';
+// import EvalProp from './features/EvalProp';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import AlertDialog from './components/AlertDialog';
@@ -162,7 +160,7 @@ function App() {
     item_54: '',
     item_55: '',
   });
-  const [hardKPINotesSL, setHardKPINotesSL] = useState({
+  const [hardKPINotesSL, setHardKPINotesSL]: any = useState({
     item_11: '',
     item_12: '',
     item_13: '',
@@ -185,7 +183,7 @@ function App() {
     item_72: '',
     item_73: '',
   });
-  const [hardKPINotesEmployee, setHardKPINotesEmployee] = useState({
+  const [hardKPINotesEmployee, setHardKPINotesEmployee]: any = useState({
     item_11: '',
     item_12: '',
     item_13: '',
@@ -212,7 +210,13 @@ function App() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
-  const myRef = useRef(null);
+  const thRef = useRef(null);
+  const tdRefs_1 = useRef([]);
+  const tdRefs_2 = useRef([]);
+  const tdRefs_3 = useRef([]);
+  const tdRefs_4 = useRef([]);
+  const tdRefs_5 = useRef([]);
+  const firstRefs = useRef([]);
 
   const { TextArea } = Input;
 
@@ -226,7 +230,7 @@ function App() {
     );
 
     const ticket = await handleAuth();
-    const myHeaders = new Headers();
+    const myHeaders: any = new Headers();
     myHeaders.append('OTCSTicket', ticket);
     myHeaders.append('Content-Type', 'multipart/form-data');
 
@@ -521,7 +525,7 @@ function App() {
         'resh7',
         encryptText(import.meta.env.VITE_PASSWORD, kpiHardValue.value_7)
       );
-    form2.append('firsttime', firstTime);
+    form2.append('firsttime', String(firstTime));
     form2.append('nexturl', window.nextUrl);
 
     for (const pair of form2.entries()) {
@@ -609,7 +613,81 @@ function App() {
     sendData();
   };
 
+  const checkPosition = () => {
+    const thRect = thRef.current.getBoundingClientRect();
+
+    if (thRect.left <= 0) {
+      thRef.current.classList.add('highlight');
+    } else {
+      thRef.current.classList.remove('highlight');
+    }
+
+    firstRefs.current.forEach(ref => {
+      if (ref) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.left <= 0) {
+          ref.classList.add('highlight');
+        } else {
+          ref.classList.remove('highlight');
+        }
+      }
+    });
+
+    tdRefs_1.current.forEach(ref => {
+      if (ref) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.left <= 0) {
+          ref.classList.add('highlight');
+        } else {
+          ref.classList.remove('highlight');
+        }
+      }
+    });
+    tdRefs_2.current.forEach(ref => {
+      if (ref) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.left <= 0) {
+          ref.classList.add('highlight');
+        } else {
+          ref.classList.remove('highlight');
+        }
+      }
+    });
+    tdRefs_3.current.forEach(ref => {
+      if (ref) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.left <= 0) {
+          ref.classList.add('highlight');
+        } else {
+          ref.classList.remove('highlight');
+        }
+      }
+    });
+    tdRefs_4.current.forEach(ref => {
+      if (ref) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.left <= 0) {
+          ref.classList.add('highlight');
+        } else {
+          ref.classList.remove('highlight');
+        }
+      }
+    });
+    tdRefs_5.current.forEach(ref => {
+      if (ref) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.left <= 0) {
+          ref.classList.add('highlight');
+        } else {
+          ref.classList.remove('highlight');
+        }
+      }
+    });
+  };
+
   useEffect(() => {
+    window.addEventListener('scroll', checkPosition);
+    window.addEventListener('resize', checkPosition);
     const evaluatedId = userIdsFromURL();
 
     const getSoftSkillsData = async () => {
@@ -925,6 +1003,11 @@ function App() {
 
     getSoftSkillsData();
     // generateKey();
+
+    return () => {
+      window.removeEventListener('scroll', checkPosition);
+      window.removeEventListener('resize', checkPosition);
+    };
   }, []);
 
   const elements = [];
@@ -1321,7 +1404,7 @@ function App() {
                 <th className="header header--1">
                   SƏRIŞTƏLILIKLƏR<span className="header-blue"></span>
                 </th>
-                <th className="header header--categories">
+                <th className="header header--categories" ref={thRef}>
                   <p>Kategoriyalar</p>
                 </th>
                 <th className="header header--weight">
@@ -1350,7 +1433,10 @@ function App() {
                   <Fragment key={idx}>
                     <tr>
                       <th rowSpan={6}>{el.softName}</th>
-                      <td className="performance-notes__header first"></td>
+                      <td
+                        className="performance-notes__header first"
+                        ref={el => (firstRefs.current[idx] = el)}
+                      ></td>
                       <td rowSpan={6} className="category-weight">
                         {el.weight}
                       </td>
@@ -1395,7 +1481,7 @@ function App() {
                     </tr>
 
                     <tr key={el.category1}>
-                      <td>
+                      <td ref={el => (tdRefs_1.current[idx] = el)}>
                         <div className="categories">{el.category1}</div>
                       </td>
                       <td>
@@ -1453,7 +1539,7 @@ function App() {
                       </td>
                     </tr>
                     <tr>
-                      <td>
+                      <td ref={el => (tdRefs_2.current[idx] = el)}>
                         <div className="categories">{el.category2}</div>
                       </td>
                       <td>
@@ -1513,7 +1599,7 @@ function App() {
                       </td>
                     </tr>
                     <tr>
-                      <td>
+                      <td ref={el => (tdRefs_3.current[idx] = el)}>
                         <div className="categories">{el.category3}</div>
                       </td>
                       <td>
@@ -1573,7 +1659,7 @@ function App() {
                       </td>
                     </tr>
                     <tr>
-                      <td>
+                      <td ref={el => (tdRefs_4.current[idx] = el)}>
                         <div className="categories">{el.category4}</div>
                       </td>
                       <td>
@@ -1633,7 +1719,7 @@ function App() {
                       </td>
                     </tr>
                     <tr>
-                      <td>
+                      <td ref={el => (tdRefs_5.current[idx] = el)}>
                         <div className="categories">{el.category5}</div>
                       </td>
                       <td>
@@ -1711,7 +1797,7 @@ function App() {
       />
       <AdditionalNotes />
       <QualityEvaluation />
-      <EvalProp />
+      {/* <EvalProp /> */}
 
       <div className="button-container">
         <button className="enter save" onClick={handleSaveKPI}>
@@ -1734,7 +1820,7 @@ function App() {
         open={showAgreementAlert}
         handleClose={() => {
           setShowAgreementAlert(false);
-          localStorage.setItem('firstTime', 1);
+          localStorage.setItem('firstTime', '1');
           setFirstTime(1);
         }}
       />

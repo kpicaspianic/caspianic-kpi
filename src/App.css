@@ -16,7 +16,7 @@
 
 #LLOuterContainer {
   background-color: #fff;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .mainTable {
@@ -63,6 +63,7 @@
 
 .table-row {
   padding: 10px;
+  height: 240px;
 }
 
 /* .table-row:nth-of-type(even) {
@@ -153,11 +154,10 @@
   text-align: left;
   width: 120px;
   padding-left: 50px;
-  font-style: italic;
   font-size: 16px;
   padding-right: 20px;
   vertical-align: top;
-  padding-top: 10px;
+  font-weight: 600;
 }
 
 .header .row:first-child {
@@ -284,7 +284,7 @@
   border: none;
   width: 300px;
   border-bottom: 1px solid #c6cccc;
-  color: #0694c9;
+  color: #2600a7;
 }
 
 .employee-detail--input:focus {
@@ -340,7 +340,7 @@
 }
 
 .select-antd {
-  width: 60%;
+  width: 80%;
   margin-left: 5px;
   margin-top: 5px;
   font-size: 12px;
@@ -353,17 +353,23 @@
 
 .data--paragraph {
   font-size: 11px;
+  color: #5b5b5b;
   text-align: left;
   padding: 5px;
   line-height: 1.24;
 }
 
-.data--paragraph > p {
-  font-family: sans-serif !important;
-  line-height: 1.4;
-  font-size: 10px;
-  color: #1e1d1d;
-  padding: 5px 0;
+.data--paragraph-hard {
+  font-size: 11px;
+  color: #5b5b5b;
+  text-align: left;
+  margin-right: 50px;
+  padding: 5px;
+  line-height: 1.48;
+}
+
+.data--paragraph-hard:not(:first-child) {
+  margin-top: 20px;
 }
 
 .mainTable--heading {
@@ -376,7 +382,7 @@
 }
 
 .marginBottom {
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .data--span-1 {
@@ -482,43 +488,42 @@
 }
 
 .additional-notes {
-  max-width: 1200px;
-  margin: 20px auto;
-  margin-left: 10px;
+  max-width: 100%;
+  margin: 0 10px 20px 10px;
+  padding: 15px;
+  background-color: #f6f6f6;
 }
 
 .additional-notes--detail {
-  margin: 10px 0;
+  margin: 20px 0;
   display: flex;
 }
 
+.additional-notes--detail:not(:first-child) {
+  flex-direction: column;
+}
+
 .additional-notes--label {
-  font-family: 'Helvetica', sans-serif;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   padding-right: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #c6cccc;
 }
 
 .additional-notes--input {
-  font-family: 'Helvetica', sans-Serif;
   font-size: 14px;
   line-height: 16px;
-  border: none;
-  border-bottom: 1px solid #c6cccc;
   padding-bottom: 5px;
-  padding-top: 0;
   flex: 1;
-  /*width: 60%;*/
+  width: 60%;
 }
 
 /* .textarea--no-span,
 .textarea--1 */
-.employee-review,
+/* .employee-review,
 .hr-review {
   cursor: not-allowed;
-}
+} */
 
 .additional-notes--input:active,
 .additional-notes--input:focus {
@@ -529,25 +534,23 @@
   margin-left: 30px;
   display: flex;
   align-items: center;
-  cursor: not-allowed;
 }
 
 .quality-eval {
-  margin: 50px 0 0 10px;
-  max-width: 1200px;
+  background-color: #f6f6f6;
+  padding: 15px;
+  margin: 50px 10px 0 10px;
+  max-width: 100%;
   display: flex;
+  gap: 50px;
 }
 
 .quality-eval--detail {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   margin-bottom: 10px;
-  flex: 1;
+  width: 40%;
 }
 
 .quality-eval--label {
-  font-family: Helvetica, sans-serif;
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 500;
@@ -556,28 +559,21 @@
 }
 
 .quality-eval--textarea {
-  padding: 5px;
-  width: 80%;
-  height: 40%;
-  outline: none;
-  transition: 0.4s all;
-  resize: none;
-  /*padding: 20px 0;*/
-}
-
-.quality-eval--textarea:focus {
-  outline: 1px solid lightblue;
-  border-color: lightblue;
+  width: 85%;
+  margin-top: 5px;
 }
 
 .quality-eval--info {
   font-style: italic;
+  font-size: 12px;
   color: #8f8f8f;
   margin-left: 5px;
 }
 
 .quality-eval--div {
   display: flex;
+  align-items: center;
+  margin-top: 3px;
 }
 
 .inline {
@@ -778,13 +774,27 @@
 .first {
   position: sticky;
   left: 0;
-  /* z-index: 10000; */
   background-color: #f6f6f6;
-  z-index: 1;
-  box-shadow: 10px 0 5px -2px #888;
+  z-index: 1000;
+  box-shadow: 5px 5px 4px 0px rgb(205 205 205 / 75%);
+  /* overflow: visible; */
   /* background-color: #ccc; */
   /* border-color: #494949; */
   /* color: #fcfcfc; */
+}
+
+.mainTable th:nth-child(2).highlight::before,
+.mainTable td:nth-child(1).highlight::before,
+.first.highlight::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 5px 5px 4px 0px rgb(205 205 205 / 75%);
+  pointer-events: none;
 }
 
 td {

@@ -1,3 +1,6 @@
+import { Radio } from 'antd';
+import TextArea from 'antd/es/input/TextArea';
+
 export default function AdditionalNotes() {
   return (
     <div className="additional-notes">
@@ -5,63 +8,84 @@ export default function AdditionalNotes() {
         <label className="additional-notes--label" id="">
           Əməkdaşın dəyərləndirmə nəticələri ilə bağlı rəyi:
         </label>
-        <div className="additional-notes--checkbox">
-          <input
+        <Radio.Group
+          className={
+            window.currentRole === 'EMPLOYEE'
+              ? 'additional-notes--input'
+              : 'additional-notes--input not-allowed'
+          }
+          disabled={window.currentRole === 'EMPLOYEE' ? false : true}
+        >
+          <Radio
             type="checkbox"
             name=""
             id=""
             className="additional-notes--input-radio"
             value="1"
-            style={{ pointerEvents: 'none' }}
-          />
-          <span className="additional-notes--checkbox-span">Razıyam</span>
-        </div>
-        <div className="additional-notes--checkbox">
-          <input
+          >
+            Razıyam
+          </Radio>
+          <Radio
             type="checkbox"
             name=""
             id=""
             className="additional-notes--input-radio"
             value="0"
-            style={{ pointerEvents: 'none' }}
-          />
-          <span className="additional-notes--checkbox-span">Razı deyiləm</span>
-        </div>
+          >
+            Razı deyiləm
+          </Radio>
+        </Radio.Group>
       </div>
       <div className="additional-notes--detail">
         <label className="additional-notes--label" id="">
           Əməkdaşın dəyərləndirmə ilə bağlı qeydi:
         </label>
-        <textarea
+        <TextArea
+          size="large"
+          autoSize={{ minRows: 3 }}
           name=""
           id=""
-          className="additional-notes--input autofit employee-review"
-          style={{ resize: 'none' }}
-          readOnly
-        ></textarea>
+          readOnly={window.currentRole === 'EMPLOYEE' ? false : true}
+          className={
+            window.currentRole === 'EMPLOYEE'
+              ? 'additional-notes--input'
+              : 'additional-notes--input not-allowed'
+          }
+        />
       </div>
       <div className="additional-notes--detail">
         <label className="additional-notes--label" id="">
           Dəyərləndirmə keçirən rəhbərin dəyərləndirmə ilə bağlı qeydi:
         </label>
-        <textarea
+        <TextArea
+          size="large"
+          autoSize={{ minRows: 3 }}
           name=""
-          id=""
-          className="additional-notes--input autofit leader-review"
-          style={{ resize: 'none' }}
-        ></textarea>
+          id="leader-review"
+          readOnly={window.currentRole === 'MANAGER' ? false : true}
+          className={
+            window.currentRole === 'MANAGER'
+              ? 'additional-notes--input'
+              : 'additional-notes--input not-allowed'
+          }
+        />
       </div>
       <div className="additional-notes--detail">
         <label className="additional-notes--label" id="">
           IR əməkdaşının dəyərləndirmə ilə bağlı qeydi:
         </label>
-        <textarea
+        <TextArea
+          size="large"
+          autoSize={{ minRows: 3 }}
+          readOnly={window.currentRole === 'HR' ? false : true}
           name=""
-          id=""
-          className="additional-notes--input autofit hr-review"
-          style={{ resize: 'none' }}
-          readOnly
-        ></textarea>
+          id="hr-review"
+          className={
+            window.currentRole === 'HR'
+              ? 'additional-notes--input'
+              : 'additional-notes--input not-allowed'
+          }
+        />
       </div>
     </div>
   );

@@ -10,6 +10,16 @@ import LinearProgress from '@mui/material/LinearProgress';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import { ErrorOutlineOutlined } from '@mui/icons-material';
 
+type AlertDialogProps = {
+  open: boolean;
+  handleClose?: () => void;
+  warning?: boolean;
+  handleSendData?: any;
+  loading: boolean;
+  success: boolean;
+  error: boolean;
+};
+
 export default function AlertDialog({
   open,
   handleClose,
@@ -18,7 +28,7 @@ export default function AlertDialog({
   loading,
   success,
   error,
-}) {
+}: AlertDialogProps) {
   return (
     <React.Fragment>
       <Dialog
