@@ -1535,6 +1535,7 @@ function App() {
                           key={el}
                           number={`${idx + 1}1`}
                           res={el.results[`res_${idx + 1}1`]}
+                          disabled={window.currentRole === 'EMPLOYEE'}
                         />
                       </td>
                     </tr>
@@ -1594,6 +1595,7 @@ function App() {
                             key={el}
                             number={`${idx + 1}2`}
                             res={el.results[`res_${idx + 1}2`]}
+                            disabled={window.currentRole === 'EMPLOYEE'}
                           />
                         </div>
                       </td>
@@ -1654,6 +1656,7 @@ function App() {
                             key={el}
                             number={`${idx + 1}3`}
                             res={el.results[`res_${idx + 1}3`]}
+                            disabled={window.currentRole === 'EMPLOYEE'}
                           />
                         </div>
                       </td>
@@ -1714,6 +1717,7 @@ function App() {
                             key={el}
                             number={`${idx + 1}4`}
                             res={el.results[`res_${idx + 1}4`]}
+                            disabled={window.currentRole === 'EMPLOYEE'}
                           />
                         </div>
                       </td>
@@ -1771,6 +1775,7 @@ function App() {
                         <div className="select-div">
                           <SelectCriteria
                             setParagraph={setSoftParagraphValue}
+                            disabled={window.currentRole === 'EMPLOYEE'}
                             key={el}
                             number={`${idx + 1}5`}
                             res={el.results[`res_${idx + 1}5`]}

@@ -1,7 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Select } from 'antd';
 
-export const SelectCriteria = ({ res, number, setParagraph }) => {
+type SelectCriteriaProps = {
+  res: string;
+  number: string;
+  setParagraph: React.Dispatch<React.SetStateAction<object>>;
+  disabled: boolean;
+};
+
+export const SelectCriteria = ({
+  res,
+  number,
+  setParagraph,
+  disabled,
+}: SelectCriteriaProps) => {
   const setCorrectParagraph = (value: string) => {
     switch (value) {
       case '1':
@@ -70,6 +82,7 @@ export const SelectCriteria = ({ res, number, setParagraph }) => {
       <Select
         className="select-antd"
         options={options}
+        disabled={disabled}
         onChange={value => handleSoftParagraph(value, number)}
         id={number}
       />
