@@ -14,7 +14,8 @@ import axios from 'axios';
 import AlertDialog from './components/AlertDialog';
 import AgreementAlert from './components/AgreementAlert';
 import HeaderComponent from './features/HeaderComponent';
-import { Input } from 'antd';
+import { Button, Input } from 'antd';
+import { MoveLeft } from 'lucide-react';
 
 function App() {
   const [showAgreementAlert, setShowAgreementAlert] = useState(false);
@@ -1395,6 +1396,14 @@ function App() {
   return (
     <>
       <HeaderComponent />
+      <Button
+        type="text"
+        icon={<MoveLeft size={20} />}
+        className="button-back"
+        href={window.mainUrl}
+      >
+        Geri dön
+      </Button>
       <EmployeeInfo evaluatorInfo={evaluatorInfo} />
       {window.currentRole === 'EMPLOYEE' && (
         <div>

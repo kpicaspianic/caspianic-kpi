@@ -250,6 +250,7 @@
 
 .employee {
   margin: 1rem;
+  margin-top: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 3rem;
@@ -940,4 +941,13 @@ td {
 
 .textarea-antd {
   margin: 3px;
+}
+
+.button-back {
+  font-family: inherit;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 20px;
+  padding-bottom: 0;
+  font-weight: 500;
 }
