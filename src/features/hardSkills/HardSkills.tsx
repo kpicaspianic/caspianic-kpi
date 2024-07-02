@@ -104,12 +104,14 @@ export default function HardSkills({
     }
   }, [kpiHardValue]);
 
+  // console.log(kpiNotesEmployee);
+
   return (
     <table className="mainTable-hard marginBottom">
       <thead>
         <tr>
           <th className="header-hard header-hard--1">
-            KPI-lar<span className="header-blue"></span>
+            Hədəflər<span className="header-blue"></span>
           </th>
           <th className="header-hard header-hard--3">
             <p>3 ayın sonunda</p>
@@ -140,14 +142,12 @@ export default function HardSkills({
                 <TextArea
                   name=""
                   id="employee-hardSkill--1"
-                  defaultValue={kpiNotesEmployee.item_11}
+                  value={kpiNotesEmployee.item_11}
                   onChange={e => handleKPINotesEmployee(e.target.value, 11)}
                   autoSize={{ minRows: 9 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -158,15 +158,13 @@ export default function HardSkills({
                 {/* <div className="line--horizontal"></div> */}
                 <TextArea
                   name=""
-                  defaultValue={kpiNotesSL.item_11}
+                  value={kpiNotesSL.item_11}
                   onChange={e => handleKPINotesSL(e.target.value, 11)}
                   autoSize={{ minRows: 9 }}
                   id="leader-hardSkill--1"
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 ></TextArea>
               </div>
@@ -180,14 +178,12 @@ export default function HardSkills({
                 <TextArea
                   name=""
                   id="employee-hardSkill--13"
-                  defaultValue={kpiNotesEmployee.item_13}
+                  value={kpiNotesEmployee.item_13}
                   onChange={e => handleKPINotesEmployee(e.target.value, 13)}
                   autoSize={{ minRows: 9 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -197,15 +193,13 @@ export default function HardSkills({
                 <div className="line--horizontal"></div>
                 <TextArea
                   name=""
-                  defaultValue={kpiNotesSL.item_13}
+                  value={kpiNotesSL.item_13}
                   onChange={e => handleKPINotesSL(e.target.value, 13)}
                   id="leader-hardSkill--13"
                   autoSize={{ minRows: 9 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -215,7 +209,7 @@ export default function HardSkills({
             <Select
               id="select--id"
               options={options}
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_1}
               onChange={value => handleSoftParagraph(value, 1)}
               className="select--criteria-hard select-antd"
@@ -236,32 +230,28 @@ export default function HardSkills({
             <div className="data-container">
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesEmployee.item_21}
+                  value={kpiNotesEmployee.item_21}
                   onChange={e => handleKPINotesEmployee(e.target.value, 21)}
                   name=""
                   id="employee-hardSkill--2"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_21}
+                  value={kpiNotesSL.item_21}
                   onChange={e => handleKPINotesSL(e.target.value, 21)}
                   name=""
                   id="leader-hardSkill--2"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -273,32 +263,28 @@ export default function HardSkills({
                 <TextArea
                   name=""
                   id="employee-hardSkill--23"
-                  defaultValue={kpiNotesEmployee.item_23}
+                  value={kpiNotesEmployee.item_23}
                   onChange={e => handleKPINotesEmployee(e.target.value, 23)}
                   cols={10}
                   rows={10}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_23}
+                  value={kpiNotesSL.item_23}
                   onChange={e => handleKPINotesSL(e.target.value, 23)}
                   name=""
                   id="leader-hardSkill--23"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -308,7 +294,7 @@ export default function HardSkills({
             <Select
               options={options}
               id="select--id"
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_2}
               onChange={value => handleSoftParagraph(value, 2)}
               className="select--criteria-hard select-antd"
@@ -328,15 +314,13 @@ export default function HardSkills({
             <div className="data-container">
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesEmployee.item_31}
+                  value={kpiNotesEmployee.item_31}
                   onChange={e => handleKPINotesEmployee(e.target.value, 31)}
                   id="employee-hardSkill--3"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -344,14 +328,12 @@ export default function HardSkills({
               <div className="data-div">
                 <TextArea
                   id="leader-hardSkill--3"
-                  defaultValue={kpiNotesSL.item_31}
+                  value={kpiNotesSL.item_31}
                   onChange={e => handleKPINotesSL(e.target.value, 31)}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -362,29 +344,25 @@ export default function HardSkills({
               <div className="data-div">
                 <TextArea
                   id="employee-hardSkill--33"
-                  defaultValue={kpiNotesEmployee.item_33}
+                  value={kpiNotesEmployee.item_33}
                   onChange={e => handleKPINotesEmployee(e.target.value, 33)}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_33}
+                  value={kpiNotesSL.item_33}
                   onChange={e => handleKPINotesSL(e.target.value, 33)}
                   id="leader-hardSkill--33"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -394,7 +372,7 @@ export default function HardSkills({
             <Select
               options={options}
               id="select--id"
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_3}
               onChange={value => handleSoftParagraph(value, 3)}
               className="select--criteria-hard select-antd"
@@ -414,30 +392,26 @@ export default function HardSkills({
             <div className="data-container">
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesEmployee.item_41}
+                  value={kpiNotesEmployee.item_41}
                   onChange={e => handleKPINotesEmployee(e.target.value, 41)}
                   id="employee-hardSkill--4"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_41}
+                  value={kpiNotesSL.item_41}
                   onChange={e => handleKPINotesSL(e.target.value, 41)}
                   id="leader-hardSkill--4"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -448,29 +422,25 @@ export default function HardSkills({
               <div className="data-div">
                 <TextArea
                   id="employee-hardSkill--43"
-                  defaultValue={kpiNotesEmployee.item_43}
+                  value={kpiNotesEmployee.item_43}
                   onChange={e => handleKPINotesEmployee(e.target.value, 43)}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_43}
+                  value={kpiNotesSL.item_43}
                   onChange={e => handleKPINotesSL(e.target.value, 43)}
                   id="leader-hardSkill--43"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -480,7 +450,7 @@ export default function HardSkills({
             <Select
               options={options}
               id="select--id"
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_4}
               onChange={value => handleSoftParagraph(value, 4)}
               className="select--criteria-hard select-antd"
@@ -500,30 +470,26 @@ export default function HardSkills({
             <div className="data-container">
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesEmployee.item_51}
+                  value={kpiNotesEmployee.item_51}
                   onChange={e => handleKPINotesEmployee(e.target.value, 51)}
                   id="employee-hardSkill--5"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_51}
+                  value={kpiNotesSL.item_51}
                   onChange={e => handleKPINotesSL(e.target.value, 51)}
                   id="leader-hardSkill--5"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -534,29 +500,25 @@ export default function HardSkills({
               <div className="data-div">
                 <TextArea
                   id="employee-hardSkill--53"
-                  defaultValue={kpiNotesEmployee.item_53}
+                  value={kpiNotesEmployee.item_53}
                   onChange={e => handleKPINotesEmployee(e.target.value, 53)}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_53}
+                  value={kpiNotesSL.item_53}
                   onChange={e => handleKPINotesSL(e.target.value, 53)}
                   id="leader-hardSkill--53"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -566,7 +528,7 @@ export default function HardSkills({
             <Select
               options={options}
               id="select--id"
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_5}
               onChange={value => handleSoftParagraph(value, 5)}
               className="select--criteria-hard select-antd"
@@ -587,30 +549,26 @@ export default function HardSkills({
             <div className="data-container">
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesEmployee.item_61}
+                  value={kpiNotesEmployee.item_61}
                   onChange={e => handleKPINotesEmployee(e.target.value, 61)}
                   id="employee-hardSkill--6"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_61}
+                  value={kpiNotesSL.item_61}
                   onChange={e => handleKPINotesSL(e.target.value, 61)}
                   id="leader-hardSkill--6"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -621,29 +579,25 @@ export default function HardSkills({
               <div className="data-div">
                 <TextArea
                   id="employee-hardSkill-63"
-                  defaultValue={kpiNotesEmployee.item_63}
+                  value={kpiNotesEmployee.item_63}
                   onChange={e => handleKPINotesEmployee(e.target.value, 63)}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_63}
+                  value={kpiNotesSL.item_63}
                   onChange={e => handleKPINotesSL(e.target.value, 63)}
                   id="leader-hardSkill-63"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -653,7 +607,7 @@ export default function HardSkills({
             <Select
               options={options}
               id="select--id"
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_6}
               onChange={value => handleSoftParagraph(value, 6)}
               className="select--criteria-hard select-antd"
@@ -673,30 +627,26 @@ export default function HardSkills({
             <div className="data-container">
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesEmployee.item_71}
+                  value={kpiNotesEmployee.item_71}
                   onChange={e => handleKPINotesEmployee(e.target.value, 71)}
                   id="employee-hardSkill--7"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_71}
+                  value={kpiNotesSL.item_71}
                   onChange={e => handleKPINotesSL(e.target.value, 71)}
                   id="leader-hardSkill--7"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -707,29 +657,25 @@ export default function HardSkills({
               <div className="data-div">
                 <TextArea
                   id="employee-hardSkill--73"
-                  defaultValue={kpiNotesEmployee.item_73}
+                  value={kpiNotesEmployee.item_73}
                   onChange={e => handleKPINotesEmployee(e.target.value, 73)}
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'MANAGER' ? true : false}
+                  readOnly={window.asManager ? true : false}
                   className={
-                    window.currentRole === 'MANAGER'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
               <div className="line"></div>
               <div className="data-div">
                 <TextArea
-                  defaultValue={kpiNotesSL.item_73}
+                  value={kpiNotesSL.item_73}
                   onChange={e => handleKPINotesSL(e.target.value, 73)}
                   id="leader-hardSkill--73"
                   autoSize={{ minRows: 8 }}
-                  readOnly={window.currentRole === 'EMPLOYEE' ? true : false}
+                  readOnly={!window.asManager ? true : false}
                   className={
-                    window.currentRole === 'EMPLOYEE'
-                      ? 'not-allowed textarea'
-                      : 'textarea'
+                    !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
                 />
               </div>
@@ -739,7 +685,7 @@ export default function HardSkills({
             <Select
               options={options}
               id="select--id"
-              disabled={window.currentRole === 'EMPLOYEE' && true}
+              disabled={!window.asManager}
               value={kpiHardValue.value_7}
               onChange={value => handleSoftParagraph(value, 7)}
               className="select--criteria-hard select-antd"

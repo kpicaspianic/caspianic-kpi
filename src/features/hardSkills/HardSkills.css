@@ -4,6 +4,7 @@
   padding: 15px 10px;
   position: relative;
   font-size: 12px;
+  font-weight: 600;
 }
 
 .header-hard--1 {
@@ -32,6 +33,11 @@
   font-weight: 500;
   position: relative;
   background-color: #f6f6f6;
+}
+
+.mainTable-hard thead {
+  background-color: #3e48b2;
+  color: #fff;
 }
 
 .weight-paragraph {

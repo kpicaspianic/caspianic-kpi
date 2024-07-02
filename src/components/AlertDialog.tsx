@@ -41,7 +41,7 @@ export default function AlertDialog({
           id="alert-dialog-title"
           style={{
             width: loading || error ? '350px' : '350px',
-            fontSize: '24px',
+            fontSize: '20px',
             paddingLeft: '40px',
             paddingRight: '40px',
             textAlign: 'center',
@@ -50,7 +50,7 @@ export default function AlertDialog({
           {error
             ? 'Gözlənilməyən səhv yarandı..'
             : loading
-            ? 'Gözləyin...'
+            ? 'Zəhmət olmasa gözləyin...'
             : success
             ? 'Yadda saxlanıldı!'
             : warning

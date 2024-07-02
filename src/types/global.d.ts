@@ -8,6 +8,7 @@ declare global {
     OTCSTicket: string;
     currentUserId: number;
     currentRole: string;
+    asManager: string;
     checkFirst: boolean;
   }
 }

@@ -11,9 +11,9 @@ export default function QualityEvaluation() {
           </label>
           <TextArea
             className={`quality-eval--textarea ${
-              window.currentRole === 'MANAGER' ? '' : 'not-allowed'
+              window.asManager ? '' : 'not-allowed'
             }`}
-            readOnly={window.currentRole === 'MANAGER' ? false : true}
+            readOnly={window.asManager ? false : true}
             id=""
             autoSize={{ minRows: 4 }}
           />
@@ -32,9 +32,9 @@ export default function QualityEvaluation() {
           </label>
           <TextArea
             className={`quality-eval--textarea ${
-              window.currentRole === 'MANAGER' ? '' : 'not-allowed'
+              window.asManager ? '' : 'not-allowed'
             }`}
-            readOnly={window.currentRole === 'MANAGER' ? false : true}
+            readOnly={window.asManager ? false : true}
             id=""
             autoSize={{ minRows: 4 }}
           />

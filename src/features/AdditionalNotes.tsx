@@ -10,11 +10,11 @@ export default function AdditionalNotes() {
         </label>
         <Radio.Group
           className={
-            window.currentRole === 'EMPLOYEE'
+            !window.asManager
               ? 'additional-notes--input'
               : 'additional-notes--input not-allowed'
           }
-          disabled={window.currentRole === 'EMPLOYEE' ? false : true}
+          disabled={!window.asManager ? false : true}
         >
           <Radio
             type="checkbox"
@@ -45,9 +45,9 @@ export default function AdditionalNotes() {
           autoSize={{ minRows: 3 }}
           name=""
           id=""
-          readOnly={window.currentRole === 'EMPLOYEE' ? false : true}
+          readOnly={!window.asManager ? false : true}
           className={
-            window.currentRole === 'EMPLOYEE'
+            !window.asManager
               ? 'additional-notes--input'
               : 'additional-notes--input not-allowed'
           }
@@ -62,9 +62,9 @@ export default function AdditionalNotes() {
           autoSize={{ minRows: 3 }}
           name=""
           id="leader-review"
-          readOnly={window.currentRole === 'MANAGER' ? false : true}
+          readOnly={window.asManager ? false : true}
           className={
-            window.currentRole === 'MANAGER'
+            window.asManager
               ? 'additional-notes--input'
               : 'additional-notes--input not-allowed'
           }

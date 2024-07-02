@@ -463,6 +463,13 @@ function App() {
     form2.append('kpi5', encodeURIComponent(kpiHard.kpi_5));
     form2.append('kpi6', encodeURIComponent(kpiHard.kpi_6));
     form2.append('kpi7', encodeURIComponent(kpiHard.kpi_7));
+    form2.append('weight1', kpiWeight.weight_1);
+    form2.append('weight2', kpiWeight.weight_2);
+    form2.append('weight3', kpiWeight.weight_3);
+    form2.append('weight4', kpiWeight.weight_4);
+    form2.append('weight5', kpiWeight.weight_5);
+    form2.append('weight6', kpiWeight.weight_6);
+    form2.append('weight7', kpiWeight.weight_7);
     form2.append('cmhe11', encodeURIComponent(hardKPINotesEmployee.item_11));
     form2.append('cmhe13', encodeURIComponent(hardKPINotesEmployee.item_13));
     form2.append('cmhe21', encodeURIComponent(hardKPINotesEmployee.item_21));
@@ -1393,6 +1400,8 @@ function App() {
     }
   }
 
+  console.log(softKPINotesEmployee);
+
   return (
     <>
       <HeaderComponent />
@@ -1504,12 +1513,10 @@ function App() {
                                 [`item_${idx + 1}1`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.emplNote[`item_${idx + 1}1`]}
-                            readOnly={
-                              window.currentRole === 'MANAGER' ? true : false
-                            }
+                            value={el.emplNote[`item_${idx + 1}1`]}
+                            readOnly={window.asManager ? true : false}
                             className={
-                              window.currentRole === 'MANAGER'
+                              window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1525,12 +1532,10 @@ function App() {
                                 [`item_${idx + 1}1`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.slNote[`item_${idx + 1}1`]}
-                            readOnly={
-                              window.currentRole === 'EMPLOYEE' ? true : false
-                            }
+                            value={el.slNote[`item_${idx + 1}1`]}
+                            readOnly={!window.asManager ? true : false}
                             className={
-                              window.currentRole === 'EMPLOYEE'
+                              !window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1544,7 +1549,7 @@ function App() {
                           key={el}
                           number={`${idx + 1}1`}
                           res={el.results[`res_${idx + 1}1`]}
-                          disabled={window.currentRole === 'EMPLOYEE'}
+                          disabled={!window.asManager}
                         />
                       </td>
                     </tr>
@@ -1563,12 +1568,10 @@ function App() {
                                 [`item_${idx + 1}2`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.emplNote[`item_${idx + 1}2`]}
-                            readOnly={
-                              window.currentRole === 'MANAGER' ? true : false
-                            }
+                            value={el.emplNote[`item_${idx + 1}2`]}
+                            readOnly={window.asManager ? true : false}
                             className={
-                              window.currentRole === 'MANAGER'
+                              window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1584,12 +1587,10 @@ function App() {
                                 [`item_${idx + 1}2`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.slNote[`item_${idx + 1}2`]}
-                            readOnly={
-                              window.currentRole === 'EMPLOYEE' ? true : false
-                            }
+                            value={el.slNote[`item_${idx + 1}2`]}
+                            readOnly={!window.asManager ? true : false}
                             className={
-                              window.currentRole === 'EMPLOYEE'
+                              !window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1604,7 +1605,7 @@ function App() {
                             key={el}
                             number={`${idx + 1}2`}
                             res={el.results[`res_${idx + 1}2`]}
-                            disabled={window.currentRole === 'EMPLOYEE'}
+                            disabled={!window.asManager}
                           />
                         </div>
                       </td>
@@ -1624,12 +1625,10 @@ function App() {
                                 [`item_${idx + 1}3`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.emplNote[`item_${idx + 1}3`]}
-                            readOnly={
-                              window.currentRole === 'MANAGER' ? true : false
-                            }
+                            value={el.emplNote[`item_${idx + 1}3`]}
+                            readOnly={window.asManager ? true : false}
                             className={
-                              window.currentRole === 'MANAGER'
+                              window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1645,12 +1644,10 @@ function App() {
                                 [`item_${idx + 1}3`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.slNote[`item_${idx + 1}3`]}
-                            readOnly={
-                              window.currentRole === 'EMPLOYEE' ? true : false
-                            }
+                            value={el.slNote[`item_${idx + 1}3`]}
+                            readOnly={!window.asManager ? true : false}
                             className={
-                              window.currentRole === 'EMPLOYEE'
+                              !window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1665,7 +1662,7 @@ function App() {
                             key={el}
                             number={`${idx + 1}3`}
                             res={el.results[`res_${idx + 1}3`]}
-                            disabled={window.currentRole === 'EMPLOYEE'}
+                            disabled={!window.asManager}
                           />
                         </div>
                       </td>
@@ -1685,12 +1682,10 @@ function App() {
                                 [`item_${idx + 1}4`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.emplNote[`item_${idx + 1}4`]}
-                            readOnly={
-                              window.currentRole === 'MANAGER' ? true : false
-                            }
+                            value={el.emplNote[`item_${idx + 1}4`]}
+                            readOnly={window.asManager ? true : false}
                             className={
-                              window.currentRole === 'MANAGER'
+                              window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1706,12 +1701,10 @@ function App() {
                                 [`item_${idx + 1}4`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.slNote[`item_${idx + 1}4`]}
-                            readOnly={
-                              window.currentRole === 'EMPLOYEE' ? true : false
-                            }
+                            value={el.slNote[`item_${idx + 1}4`]}
+                            readOnly={!window.asManager ? true : false}
                             className={
-                              window.currentRole === 'EMPLOYEE'
+                              !window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1726,7 +1719,7 @@ function App() {
                             key={el}
                             number={`${idx + 1}4`}
                             res={el.results[`res_${idx + 1}4`]}
-                            disabled={window.currentRole === 'EMPLOYEE'}
+                            disabled={!window.asManager}
                           />
                         </div>
                       </td>
@@ -1746,12 +1739,10 @@ function App() {
                                 [`item_${idx + 1}5`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.emplNote[`item_${idx + 1}5`]}
-                            readOnly={
-                              window.currentRole === 'MANAGER' ? true : false
-                            }
+                            value={el.emplNote[`item_${idx + 1}5`]}
+                            readOnly={window.asManager ? true : false}
                             className={
-                              window.currentRole === 'MANAGER'
+                              window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1767,12 +1758,10 @@ function App() {
                                 [`item_${idx + 1}5`]: e.target.value,
                               }));
                             }}
-                            defaultValue={el.slNote[`item_${idx + 1}5`]}
-                            readOnly={
-                              window.currentRole === 'EMPLOYEE' ? true : false
-                            }
+                            value={el.slNote[`item_${idx + 1}5`]}
+                            readOnly={!window.asManager ? true : false}
                             className={
-                              window.currentRole === 'EMPLOYEE'
+                              !window.asManager
                                 ? 'not-allowed textarea-antd'
                                 : 'textarea-antd'
                             }
@@ -1784,7 +1773,7 @@ function App() {
                         <div className="select-div">
                           <SelectCriteria
                             setParagraph={setSoftParagraphValue}
-                            disabled={window.currentRole === 'EMPLOYEE'}
+                            disabled={!window.asManager}
                             key={el}
                             number={`${idx + 1}5`}
                             res={el.results[`res_${idx + 1}5`]}
