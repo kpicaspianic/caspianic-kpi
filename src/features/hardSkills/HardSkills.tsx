@@ -113,9 +113,9 @@ export default function HardSkills({
           <th className="header-hard header-hard--1">
             Hədəflər<span className="header-blue"></span>
           </th>
-          <th className="header-hard header-hard--3">
+          {/* <th className="header-hard header-hard--3">
             <p>3 ayın sonunda</p>
-          </th>
+          </th> */}
           <th className="header-hard header-hard--3">
             <p>Yekun Qiymətləndirmə</p>
           </th>
@@ -133,8 +133,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-1">{kpiHard.kpi_1}</p>
           </th>
-          <td className="data">
-            {/* className="data--span-1 position-right" */}
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <span>Əməkdaşın qeydləri</span>
@@ -153,9 +152,7 @@ export default function HardSkills({
               </div>
               <div className="line"></div>
               <div className="data-div">
-                {/* className="data--span-2 position-left" */}
                 <span>Rəhbərin rəyi</span>
-                {/* <div className="line--horizontal"></div> */}
                 <TextArea
                   name=""
                   value={kpiNotesSL.item_11}
@@ -169,7 +166,7 @@ export default function HardSkills({
                 ></TextArea>
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
@@ -226,7 +223,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-2">{kpiHard.kpi_2}</p>
           </th>
-          <td className="data">
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <TextArea
@@ -256,7 +253,7 @@ export default function HardSkills({
                 />
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
@@ -310,7 +307,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-3">{kpiHard.kpi_3}</p>
           </th>
-          <td className="data">
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <TextArea
@@ -338,7 +335,7 @@ export default function HardSkills({
                 />
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
@@ -388,7 +385,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-4">{kpiHard.kpi_4}</p>
           </th>
-          <td className="data">
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <TextArea
@@ -416,7 +413,7 @@ export default function HardSkills({
                 />
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
@@ -466,7 +463,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-5">{kpiHard.kpi_5}</p>
           </th>
-          <td className="data">
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <TextArea
@@ -494,7 +491,7 @@ export default function HardSkills({
                 />
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
@@ -545,7 +542,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-5">{kpiHard.kpi_6}</p>
           </th>
-          <td className="data">
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <TextArea
@@ -573,7 +570,7 @@ export default function HardSkills({
                 />
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
@@ -623,7 +620,7 @@ export default function HardSkills({
             </p>
             <p id="kpi-5">{kpiHard.kpi_7}</p>
           </th>
-          <td className="data">
+          {/* <td className="data">
             <div className="data-container">
               <div className="data-div">
                 <TextArea
@@ -651,7 +648,7 @@ export default function HardSkills({
                 />
               </div>
             </div>
-          </td>
+          </td> */}
           <td className="data">
             <div className="data-container">
               <div className="data-div">
