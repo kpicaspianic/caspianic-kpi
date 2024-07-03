@@ -10,5 +10,10 @@ declare global {
     currentRole: string;
     asManager: string;
     checkFirst: boolean;
+    wbIds: {
+      sendInLeader: number;
+      approveInEmployee: number;
+      approveInLeader: number;
+    };
   }
 }

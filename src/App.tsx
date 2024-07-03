@@ -3,6 +3,7 @@ import { EmployeeInfo } from './features/EmployeeInfo';
 import { SelectCriteria } from './components/SelectCriteria';
 import { handleAuth } from './utils/auth';
 import { decryptText, encryptText } from './utils/encode';
+import { userIdsFromURL } from './utils/userIdsFromURL';
 import { useState, useEffect, useRef } from 'react';
 import { Fragment } from 'react';
 import HardSkills from './features/hardSkills/HardSkills';
@@ -18,6 +19,7 @@ import { Button, Input } from 'antd';
 import { MoveLeft } from 'lucide-react';
 
 function App() {
+  const [status, setStatus] = useState('');
   const [showAgreementAlert, setShowAgreementAlert] = useState(false);
   const [firstTime, setFirstTime] = useState(0);
   const [evaluatorInfo, setEvaluatorInfo] = useState({
@@ -221,9 +223,10 @@ function App() {
 
   const { TextArea } = Input;
 
-  const sendData = async () => {
+  const evaluatedId = userIdsFromURL();
+
+  const sendData = async (status: string) => {
     console.log(hardKPINotesSL);
-    const evaluatedId = userIdsFromURL();
     const evaluatorId = evaluatorInfo.id;
     const currentDate = new Date();
     const formattedCurrentDate = dayjs(currentDate).format(
@@ -454,7 +457,7 @@ function App() {
     form2.append('evaluator', evaluatorId);
     form2.append('enteredate', formattedCurrentDate);
     form2.append('evperiod', '01-05-2024 : 31-10-2024');
-    form2.append('status', 'assigned');
+    form2.append('status', status);
     form2.append('type', '');
     form2.append('kpi1', encodeURIComponent(kpiHard.kpi_1));
     form2.append('kpi2', encodeURIComponent(kpiHard.kpi_2));
@@ -587,38 +590,51 @@ function App() {
     }
   };
 
-  // const sendHardSkillsData = async () => {
-  //   const { evaluatedId, evaluatorId } = userIdsFromURL();
-  //   const currentDate = new Date();
-  //   const formattedCurrentDate = dayjs(currentDate).format(
-  //     'ddd MMM DD HH:mm:ss YYYY'
-  //   );
+  const sendWorkflow = async (webreportId: number) => {
+    try {
+      const ticket = await handleAuth();
+      const myHeaders = new Headers();
 
-  //   const ticket = await handleAuth();
-  //   const myHeaders = new Headers();
-  //   myHeaders.append('OTCSTicket', ticket);
-  //   myHeaders.append('Content-Type', 'multipart/form-data');
+      myHeaders.append('OTCSTicket', ticket);
 
-  // };
+      const url =
+        window.mainUrl +
+        `?func=ll&objId=${webreportId}&objAction=RunReport&evaluated=${evaluatedId}&nexturl=${window.nextUrl}`;
+
+      const requestOptions: RequestInit = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      };
+
+      await fetch(url, requestOptions);
+    } catch (error) {
+      console.log("workflow didn't go good on user employee side :(");
+      console.log(error);
+    }
+  };
 
   const consoleSomething = () => {
     // console.log(kpiHardValue);
     console.log(hardKPINotesSL);
   };
 
-  const userIdsFromURL = () => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const evaluatedId = urlParams.get('evaluated');
-
-    return evaluatedId;
-  };
-
   const handleSaveKPI = () => {
     consoleSomething();
     setLoading(true);
     setOpen(true);
-    sendData();
+    sendData('assigned');
+  };
+
+  const handleSendKPI = (webreportId: number) => {
+    setLoading(true);
+    setOpen(true);
+    window.asManager
+      ? status === 'send by employee'
+        ? sendData('in HR')
+        : sendData('send by leader')
+      : sendData('send by employee');
+    sendWorkflow(webreportId);
   };
 
   const checkPosition = () => {
@@ -716,6 +732,8 @@ function App() {
       console.log(data);
 
       if (data.result.length > 1) {
+        setStatus(data.result[0].status);
+
         setSoftSkillsData({
           soft1_input1: data.result[0].soft1_input1,
           soft1_input2: data.result[0].soft1_input2,
@@ -1806,10 +1824,30 @@ function App() {
         <button className="enter save" onClick={handleSaveKPI}>
           Yadda Saxla
         </button>
-        {/* <button className="enter send" onClick={consoleSomething}>
-          Göndər
-        </button>
-        <button className="enter approve">Təsdiq Et</button> */}
+        {status === 'assigned' && window.asManager && (
+          <button
+            className="enter send"
+            onClick={() => handleSendKPI(window.wbIds.sendInLeader)}
+          >
+            Göndər
+          </button>
+        )}
+        {!window.asManager && status === 'send by leader' && (
+          <button
+            className="enter approve"
+            onClick={() => handleSendKPI(window.wbIds.approveInEmployee)}
+          >
+            Göndər
+          </button>
+        )}
+        {window.asManager && status === 'send by employee' && (
+          <button
+            className="enter approve"
+            onClick={() => handleSendKPI(window.wbIds.approveInLeader)}
+          >
+            Təsdiq Et
+          </button>
+        )}
       </div>
 
       <AlertDialog

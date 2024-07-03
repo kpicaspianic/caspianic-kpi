@@ -1,6 +1,7 @@
 import '../App.css';
 import { useState, useEffect } from 'react';
 import { handleAuth } from '../utils/auth';
+import { userIdsFromURL } from '../utils/userIdsFromURL';
 
 export const EmployeeInfo = ({ evaluatorInfo }) => {
   const [evaluated, setEvaluated] = useState({
@@ -16,9 +17,7 @@ export const EmployeeInfo = ({ evaluatorInfo }) => {
   // });
 
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const evaluatedId = urlParams.get('evaluated');
+    const evaluatedId = userIdsFromURL();
     setEvaluated(prevValue => ({ ...prevValue, userId: evaluatedId }));
 
     // const evaluatorId = evaluatorInfo.id;

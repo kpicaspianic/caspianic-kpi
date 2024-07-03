@@ -226,7 +226,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin: 30px 0;
   margin-right: 60px;
+}
+
+.approve {
+  background-color: darkblue;
 }
 
 /*.send:active {*/
@@ -252,11 +257,6 @@
   font-style: italic;
   font-size: 14px;
   margin-left: 5px;
-}
-
-.button-container {
-  height: 20%;
-  /* position: relative; */
 }
 
 .employee {
