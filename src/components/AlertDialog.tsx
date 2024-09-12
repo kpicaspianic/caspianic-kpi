@@ -18,6 +18,7 @@ type AlertDialogProps = {
   loading: boolean;
   success: boolean;
   error: boolean;
+  successMessage: string;
 };
 
 export default function AlertDialog({
@@ -27,6 +28,7 @@ export default function AlertDialog({
   handleSendData,
   loading,
   success,
+  successMessage,
   error,
 }: AlertDialogProps) {
   return (
@@ -52,7 +54,7 @@ export default function AlertDialog({
             : loading
             ? 'Zəhmət olmasa gözləyin...'
             : success
-            ? 'Yadda saxlanıldı!'
+            ? successMessage
             : warning
             ? 'Qiymətləndirmədiyiniz sətir var!'
             : 'Təsdiq etməyə əminsiniz?'}

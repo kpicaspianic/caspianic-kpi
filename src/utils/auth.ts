@@ -7,7 +7,7 @@ export const handleAuth = async () => {
 
     const urlEncoded = new URLSearchParams();
     urlEncoded.append('username', 'javid.gasimov');
-    urlEncoded.append('password', 'locale4321');
+    urlEncoded.append('password', 'Ecm12345');
 
     const requestOptions: RequestInit = {
       method: 'POST',

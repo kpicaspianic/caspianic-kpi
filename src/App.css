@@ -216,6 +216,12 @@
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
+.enter:disabled {
+  background-color: #bdbdbd !important;
+  box-shadow: none !important;
+  cursor: unset !important;
+}
+
 .save {
   background-color: #0eb052;
   padding: 15px 20px;

@@ -17,6 +17,19 @@ import AgreementAlert from './components/AgreementAlert';
 import HeaderComponent from './features/HeaderComponent';
 import { Button, Input } from 'antd';
 import { MoveLeft } from 'lucide-react';
+import { ThemeProvider, createTheme, GlobalStyles } from '@mui/material';
+
+const theme = createTheme({
+  components: {
+    MuiInputBase: {
+      defaultProps: {
+        // These should boots the performance of the TextField components as GlobalStyles for the auto-fill keyframes will not be injected/removed on mount/unmount.
+        // This option is intended to help with boosting the initial rendering performance if you are loading a big amount of Input components at once.
+        disableInjectingGlobalStyles: true,
+      },
+    },
+  },
+});
 
 function App() {
   const [status, setStatus] = useState('');
@@ -212,6 +225,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [warning, setWarning] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [updateData, setUpdateData] = useState(false);
   const [open, setOpen] = useState(false);
   const thRef = useRef(null);
   const tdRefs_1 = useRef([]);
@@ -225,8 +241,14 @@ function App() {
 
   const evaluatedId = userIdsFromURL();
 
+  // function checkProperties(obj) {
+  //   for (const key in obj) {
+  //     if (obj[key] == '') return false;
+  //   }
+  //   return true;
+  // }
+
   const sendData = async (status: string) => {
-    console.log(hardKPINotesSL);
     const evaluatorId = evaluatorInfo.id;
     const currentDate = new Date();
     const formattedCurrentDate = dayjs(currentDate).format(
@@ -539,9 +561,9 @@ function App() {
     form2.append('firsttime', String(firstTime));
     form2.append('nexturl', window.nextUrl);
 
-    for (const pair of form2.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
+    // for (const pair of form2.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1]);
+    // }
 
     // .all([
     //   {
@@ -616,7 +638,8 @@ function App() {
 
   const consoleSomething = () => {
     // console.log(kpiHardValue);
-    console.log(hardKPINotesSL);
+    // console.log(hardKPINotesSL)
+    console.log(hardKPINotesEmployee);
   };
 
   const handleSaveKPI = () => {
@@ -627,6 +650,7 @@ function App() {
   };
 
   const handleSendKPI = (webreportId: number) => {
+    setWarning(true);
     setLoading(true);
     setOpen(true);
     window.asManager
@@ -735,31 +759,110 @@ function App() {
         setStatus(data.result[0].status);
 
         setSoftSkillsData({
-          soft1_input1: data.result[0].soft1_input1,
-          soft1_input2: data.result[0].soft1_input2,
-          soft1_input3: data.result[0].soft1_input3,
-          soft1_input4: data.result[0].soft1_input4,
-          soft1_input5: data.result[0].soft1_input5,
-          soft2_input1: data.result[0].soft2_input1,
-          soft2_input2: data.result[0].soft2_input2,
-          soft2_input3: data.result[0].soft2_input3,
-          soft2_input4: data.result[0].soft2_input4,
-          soft2_input5: data.result[0].soft2_input5,
-          soft3_input1: data.result[0].soft3_input1,
-          soft3_input2: data.result[0].soft3_input2,
-          soft3_input3: data.result[0].soft3_input3,
-          soft3_input4: data.result[0].soft3_input4,
-          soft3_input5: data.result[0].soft3_input5,
-          soft4_input1: data.result[0].soft4_input1,
-          soft4_input2: data.result[0].soft4_input2,
-          soft4_input3: data.result[0].soft4_input3,
-          soft4_input4: data.result[0].soft4_input4,
-          soft4_input5: data.result[0].soft4_input5,
-          soft5_input1: data.result[0].soft5_input1,
-          soft5_input2: data.result[0].soft5_input2,
-          soft5_input3: data.result[0].soft5_input3,
-          soft5_input4: data.result[0].soft5_input4,
-          soft5_input5: data.result[0].soft5_input5,
+          soft1_input1:
+            data.result[0].soft1_input1 !== '?'
+              ? data.result[0].soft1_input1
+              : '',
+          soft1_input2:
+            data.result[0].soft1_input2 !== '?'
+              ? data.result[0].soft1_input2
+              : '',
+          soft1_input3:
+            data.result[0].soft1_input3 !== '?'
+              ? data.result[0].soft1_input3
+              : '',
+          soft1_input4:
+            data.result[0].soft1_input4 !== '?'
+              ? data.result[0].soft1_input4
+              : '',
+          soft1_input5:
+            data.result[0].soft1_input5 !== '?'
+              ? data.result[0].soft1_input5
+              : '',
+
+          soft2_input1:
+            data.result[0].soft2_input1 !== '?'
+              ? data.result[0].soft2_input1
+              : '',
+          soft2_input2:
+            data.result[0].soft2_input2 !== '?'
+              ? data.result[0].soft2_input2
+              : '',
+          soft2_input3:
+            data.result[0].soft2_input3 !== '?'
+              ? data.result[0].soft2_input3
+              : '',
+          soft2_input4:
+            data.result[0].soft2_input4 !== '?'
+              ? data.result[0].soft2_input4
+              : '',
+          soft2_input5:
+            data.result[0].soft2_input5 !== '?'
+              ? data.result[0].soft2_input5
+              : '',
+
+          soft3_input1:
+            data.result[0].soft3_input1 !== '?'
+              ? data.result[0].soft3_input1
+              : '',
+          soft3_input2:
+            data.result[0].soft3_input2 !== '?'
+              ? data.result[0].soft3_input2
+              : '',
+          soft3_input3:
+            data.result[0].soft3_input3 !== '?'
+              ? data.result[0].soft3_input3
+              : '',
+          soft3_input4:
+            data.result[0].soft3_input4 !== '?'
+              ? data.result[0].soft3_input4
+              : '',
+          soft3_input5:
+            data.result[0].soft3_input5 !== '?'
+              ? data.result[0].soft3_input5
+              : '',
+
+          soft4_input1:
+            data.result[0].soft4_input1 !== '?'
+              ? data.result[0].soft4_input1
+              : '',
+          soft4_input2:
+            data.result[0].soft4_input2 !== '?'
+              ? data.result[0].soft4_input2
+              : '',
+          soft4_input3:
+            data.result[0].soft4_input3 !== '?'
+              ? data.result[0].soft4_input3
+              : '',
+          soft4_input4:
+            data.result[0].soft4_input4 !== '?'
+              ? data.result[0].soft4_input4
+              : '',
+          soft4_input5:
+            data.result[0].soft4_input5 !== '?'
+              ? data.result[0].soft4_input5
+              : '',
+
+          soft5_input1:
+            data.result[0].soft5_input1 !== '?'
+              ? data.result[0].soft5_input1
+              : '',
+          soft5_input2:
+            data.result[0].soft5_input2 !== '?'
+              ? data.result[0].soft5_input2
+              : '',
+          soft5_input3:
+            data.result[0].soft5_input3 !== '?'
+              ? data.result[0].soft5_input3
+              : '',
+          soft5_input4:
+            data.result[0].soft5_input4 !== '?'
+              ? data.result[0].soft5_input4
+              : '',
+          soft5_input5:
+            data.result[0].soft5_input5 !== '?'
+              ? data.result[0].soft5_input5
+              : '',
         });
         setKpiHard({
           kpi_1: decodeURIComponent(data.result[0].kpiHard_1),
@@ -913,92 +1016,334 @@ function App() {
         });
 
         setSoftKPINotesSL({
-          item_11: data.result[0].noteItem_11,
-          item_12: data.result[0].noteItem_12,
-          item_13: data.result[0].noteItem_13,
-          item_14: data.result[0].noteItem_14,
-          item_15: data.result[0].noteItem_15,
-          item_21: data.result[0].noteItem_21,
-          item_22: data.result[0].noteItem_22,
-          item_23: data.result[0].noteItem_23,
-          item_24: data.result[0].noteItem_24,
-          item_25: data.result[0].noteItem_25,
-          item_31: data.result[0].noteItem_31,
-          item_32: data.result[0].noteItem_32,
-          item_33: data.result[0].noteItem_33,
-          item_34: data.result[0].noteItem_34,
-          item_35: data.result[0].noteItem_35,
-          item_41: data.result[0].noteItem_41,
-          item_42: data.result[0].noteItem_42,
-          item_43: data.result[0].noteItem_43,
-          item_44: data.result[0].noteItem_44,
-          item_45: data.result[0].noteItem_45,
-          item_51: data.result[0].noteItem_51,
-          item_52: data.result[0].noteItem_52,
-          item_53: data.result[0].noteItem_53,
-          item_54: data.result[0].noteItem_54,
-          item_55: data.result[0].noteItem_55,
+          item_11:
+            data.result[0].noteItem_11 !== '?'
+              ? data.result[0].noteItem_11
+              : '',
+          item_12:
+            data.result[0].noteItem_12 !== '?'
+              ? data.result[0].noteItem_12
+              : '',
+          item_13:
+            data.result[0].noteItem_13 !== '?'
+              ? data.result[0].noteItem_13
+              : '',
+          item_14:
+            data.result[0].noteItem_14 !== '?'
+              ? data.result[0].noteItem_14
+              : '',
+          item_15:
+            data.result[0].noteItem_15 !== '?'
+              ? data.result[0].noteItem_15
+              : '',
+
+          item_21:
+            data.result[0].noteItem_21 !== '?'
+              ? data.result[0].noteItem_21
+              : '',
+          item_22:
+            data.result[0].noteItem_22 !== '?'
+              ? data.result[0].noteItem_22
+              : '',
+          item_23:
+            data.result[0].noteItem_23 !== '?'
+              ? data.result[0].noteItem_23
+              : '',
+          item_24:
+            data.result[0].noteItem_24 !== '?'
+              ? data.result[0].noteItem_24
+              : '',
+          item_25:
+            data.result[0].noteItem_25 !== '?'
+              ? data.result[0].noteItem_25
+              : '',
+
+          item_31:
+            data.result[0].noteItem_31 !== '?'
+              ? data.result[0].noteItem_31
+              : '',
+          item_32:
+            data.result[0].noteItem_32 !== '?'
+              ? data.result[0].noteItem_32
+              : '',
+          item_33:
+            data.result[0].noteItem_33 !== '?'
+              ? data.result[0].noteItem_33
+              : '',
+          item_34:
+            data.result[0].noteItem_34 !== '?'
+              ? data.result[0].noteItem_34
+              : '',
+          item_35:
+            data.result[0].noteItem_35 !== '?'
+              ? data.result[0].noteItem_35
+              : '',
+
+          item_41:
+            data.result[0].noteItem_41 !== '?'
+              ? data.result[0].noteItem_41
+              : '',
+          item_42:
+            data.result[0].noteItem_42 !== '?'
+              ? data.result[0].noteItem_42
+              : '',
+          item_43:
+            data.result[0].noteItem_43 !== '?'
+              ? data.result[0].noteItem_43
+              : '',
+          item_44:
+            data.result[0].noteItem_44 !== '?'
+              ? data.result[0].noteItem_44
+              : '',
+          item_45:
+            data.result[0].noteItem_45 !== '?'
+              ? data.result[0].noteItem_45
+              : '',
+
+          item_51:
+            data.result[0].noteItem_51 !== '?'
+              ? data.result[0].noteItem_51
+              : '',
+          item_52:
+            data.result[0].noteItem_52 !== '?'
+              ? data.result[0].noteItem_52
+              : '',
+          item_53:
+            data.result[0].noteItem_53 !== '?'
+              ? data.result[0].noteItem_53
+              : '',
+          item_54:
+            data.result[0].noteItem_54 !== '?'
+              ? data.result[0].noteItem_54
+              : '',
+          item_55:
+            data.result[0].noteItem_55 !== '?'
+              ? data.result[0].noteItem_55
+              : '',
         });
         setSoftKPINotesEmployee({
-          item_11: data.result[0].noteItemEmpl_11,
-          item_12: data.result[0].noteItemEmpl_12,
-          item_13: data.result[0].noteItemEmpl_13,
-          item_14: data.result[0].noteItemEmpl_14,
-          item_15: data.result[0].noteItemEmpl_15,
-          item_21: data.result[0].noteItemEmpl_21,
-          item_22: data.result[0].noteItemEmpl_22,
-          item_23: data.result[0].noteItemEmpl_23,
-          item_24: data.result[0].noteItemEmpl_24,
-          item_25: data.result[0].noteItemEmpl_25,
-          item_31: data.result[0].noteItemEmpl_31,
-          item_32: data.result[0].noteItemEmpl_32,
-          item_33: data.result[0].noteItemEmpl_33,
-          item_34: data.result[0].noteItemEmpl_34,
-          item_35: data.result[0].noteItemEmpl_35,
-          item_41: data.result[0].noteItemEmpl_41,
-          item_42: data.result[0].noteItemEmpl_42,
-          item_43: data.result[0].noteItemEmpl_43,
-          item_44: data.result[0].noteItemEmpl_44,
-          item_45: data.result[0].noteItemEmpl_45,
-          item_51: data.result[0].noteItemEmpl_51,
-          item_52: data.result[0].noteItemEmpl_52,
-          item_53: data.result[0].noteItemEmpl_53,
-          item_54: data.result[0].noteItemEmpl_54,
-          item_55: data.result[0].noteItemEmpl_55,
+          item_11:
+            data.result[0].noteItemEmpl_11 !== '?'
+              ? data.result[0].noteItemEmpl_11
+              : '',
+          item_12:
+            data.result[0].noteItemEmpl_12 !== '?'
+              ? data.result[0].noteItemEmpl_12
+              : '',
+          item_13:
+            data.result[0].noteItemEmpl_13 !== '?'
+              ? data.result[0].noteItemEmpl_13
+              : '',
+          item_14:
+            data.result[0].noteItemEmpl_14 !== '?'
+              ? data.result[0].noteItemEmpl_14
+              : '',
+          item_15:
+            data.result[0].noteItemEmpl_15 !== '?'
+              ? data.result[0].noteItemEmpl_15
+              : '',
+
+          item_21:
+            data.result[0].noteItemEmpl_21 !== '?'
+              ? data.result[0].noteItemEmpl_21
+              : '',
+          item_22:
+            data.result[0].noteItemEmpl_22 !== '?'
+              ? data.result[0].noteItemEmpl_22
+              : '',
+          item_23:
+            data.result[0].noteItemEmpl_23 !== '?'
+              ? data.result[0].noteItemEmpl_23
+              : '',
+          item_24:
+            data.result[0].noteItemEmpl_24 !== '?'
+              ? data.result[0].noteItemEmpl_24
+              : '',
+          item_25:
+            data.result[0].noteItemEmpl_25 !== '?'
+              ? data.result[0].noteItemEmpl_25
+              : '',
+
+          item_31:
+            data.result[0].noteItemEmpl_31 !== '?'
+              ? data.result[0].noteItemEmpl_31
+              : '',
+          item_32:
+            data.result[0].noteItemEmpl_32 !== '?'
+              ? data.result[0].noteItemEmpl_32
+              : '',
+          item_33:
+            data.result[0].noteItemEmpl_33 !== '?'
+              ? data.result[0].noteItemEmpl_33
+              : '',
+          item_34:
+            data.result[0].noteItemEmpl_34 !== '?'
+              ? data.result[0].noteItemEmpl_34
+              : '',
+          item_35:
+            data.result[0].noteItemEmpl_35 !== '?'
+              ? data.result[0].noteItemEmpl_35
+              : '',
+
+          item_41:
+            data.result[0].noteItemEmpl_41 !== '?'
+              ? data.result[0].noteItemEmpl_41
+              : '',
+          item_42:
+            data.result[0].noteItemEmpl_42 !== '?'
+              ? data.result[0].noteItemEmpl_42
+              : '',
+          item_43:
+            data.result[0].noteItemEmpl_43 !== '?'
+              ? data.result[0].noteItemEmpl_43
+              : '',
+          item_44:
+            data.result[0].noteItemEmpl_44 !== '?'
+              ? data.result[0].noteItemEmpl_44
+              : '',
+          item_45:
+            data.result[0].noteItemEmpl_45 !== '?'
+              ? data.result[0].noteItemEmpl_45
+              : '',
+
+          item_51:
+            data.result[0].noteItemEmpl_51 !== '?'
+              ? data.result[0].noteItemEmpl_51
+              : '',
+          item_52:
+            data.result[0].noteItemEmpl_52 !== '?'
+              ? data.result[0].noteItemEmpl_52
+              : '',
+          item_53:
+            data.result[0].noteItemEmpl_53 !== '?'
+              ? data.result[0].noteItemEmpl_53
+              : '',
+          item_54:
+            data.result[0].noteItemEmpl_54 !== '?'
+              ? data.result[0].noteItemEmpl_54
+              : '',
+          item_55:
+            data.result[0].noteItemEmpl_55 !== '?'
+              ? data.result[0].noteItemEmpl_55
+              : '',
         });
 
         setHardKPINotesEmployee({
-          item_11: decodeURIComponent(data.result[0].cmhe_11),
-          item_13: decodeURIComponent(data.result[0].cmhe_13),
-          item_21: decodeURIComponent(data.result[0].cmhe_21),
-          item_23: decodeURIComponent(data.result[0].cmhe_23),
-          item_31: decodeURIComponent(data.result[0].cmhe_31),
-          item_33: decodeURIComponent(data.result[0].cmhe_33),
-          item_41: decodeURIComponent(data.result[0].cmhe_41),
-          item_43: decodeURIComponent(data.result[0].cmhe_43),
-          item_51: decodeURIComponent(data.result[0].cmhe_51),
-          item_53: decodeURIComponent(data.result[0].cmhe_53),
-          item_61: decodeURIComponent(data.result[0].cmhe_61),
-          item_63: decodeURIComponent(data.result[0].cmhe_63),
-          item_71: decodeURIComponent(data.result[0].cmhe_71),
-          item_73: decodeURIComponent(data.result[0].cmhe_73),
+          item_11:
+            decodeURIComponent(data.result[0].cmhe_11) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_11)
+              : '',
+          item_13:
+            decodeURIComponent(data.result[0].cmhe_13) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_13)
+              : '',
+          item_21:
+            decodeURIComponent(data.result[0].cmhe_21) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_21)
+              : '',
+          item_23:
+            decodeURIComponent(data.result[0].cmhe_23) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_23)
+              : '',
+          item_31:
+            decodeURIComponent(data.result[0].cmhe_31) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_31)
+              : '',
+          item_33:
+            decodeURIComponent(data.result[0].cmhe_33) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_33)
+              : '',
+          item_41:
+            decodeURIComponent(data.result[0].cmhe_41) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_41)
+              : '',
+          item_43:
+            decodeURIComponent(data.result[0].cmhe_43) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_43)
+              : '',
+          item_51:
+            decodeURIComponent(data.result[0].cmhe_51) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_51)
+              : '',
+          item_53:
+            decodeURIComponent(data.result[0].cmhe_53) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_53)
+              : '',
+          item_61:
+            decodeURIComponent(data.result[0].cmhe_61) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_61)
+              : '',
+          item_63:
+            decodeURIComponent(data.result[0].cmhe_63) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_63)
+              : '',
+          item_71:
+            decodeURIComponent(data.result[0].cmhe_71) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_71)
+              : '',
+          item_73:
+            decodeURIComponent(data.result[0].cmhe_73) !== '?'
+              ? decodeURIComponent(data.result[0].cmhe_73)
+              : '',
         });
 
         setHardKPINotesSL({
-          item_11: decodeURIComponent(data.result[0].cmhl_11),
-          item_13: decodeURIComponent(data.result[0].cmhl_13),
-          item_21: decodeURIComponent(data.result[0].cmhl_21),
-          item_23: decodeURIComponent(data.result[0].cmhl_23),
-          item_31: decodeURIComponent(data.result[0].cmhl_31),
-          item_33: decodeURIComponent(data.result[0].cmhl_33),
-          item_41: decodeURIComponent(data.result[0].cmhl_41),
-          item_43: decodeURIComponent(data.result[0].cmhl_43),
-          item_51: decodeURIComponent(data.result[0].cmhl_51),
-          item_53: decodeURIComponent(data.result[0].cmhl_53),
-          item_61: decodeURIComponent(data.result[0].cmhl_61),
-          item_63: decodeURIComponent(data.result[0].cmhl_63),
-          item_71: decodeURIComponent(data.result[0].cmhl_71),
-          item_73: decodeURIComponent(data.result[0].cmhl_73),
+          item_11:
+            decodeURIComponent(data.result[0].cmhl_11) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_11)
+              : '',
+          item_13:
+            decodeURIComponent(data.result[0].cmhl_13) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_13)
+              : '',
+          item_21:
+            decodeURIComponent(data.result[0].cmhl_21) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_21)
+              : '',
+          item_23:
+            decodeURIComponent(data.result[0].cmhl_23) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_23)
+              : '',
+          item_31:
+            decodeURIComponent(data.result[0].cmhl_31) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_31)
+              : '',
+          item_33:
+            decodeURIComponent(data.result[0].cmhl_33) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_33)
+              : '',
+          item_41:
+            decodeURIComponent(data.result[0].cmhl_41) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_41)
+              : '',
+          item_43:
+            decodeURIComponent(data.result[0].cmhl_43) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_43)
+              : '',
+          item_51:
+            decodeURIComponent(data.result[0].cmhl_51) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_51)
+              : '',
+          item_53:
+            decodeURIComponent(data.result[0].cmhl_53) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_53)
+              : '',
+          item_61:
+            decodeURIComponent(data.result[0].cmhl_61) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_61)
+              : '',
+          item_63:
+            decodeURIComponent(data.result[0].cmhl_63) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_63)
+              : '',
+          item_71:
+            decodeURIComponent(data.result[0].cmhl_71) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_71)
+              : '',
+          item_73:
+            decodeURIComponent(data.result[0].cmhl_73) !== '?'
+              ? decodeURIComponent(data.result[0].cmhl_73)
+              : '',
         });
         setEvaluatorInfo({
           id: data.result[0].evaluatorId,
@@ -1034,7 +1379,7 @@ function App() {
       window.removeEventListener('scroll', checkPosition);
       window.removeEventListener('resize', checkPosition);
     };
-  }, []);
+  }, [updateData]);
 
   const elements = [];
 
@@ -1417,8 +1762,6 @@ function App() {
         break;
     }
   }
-
-  console.log(softKPINotesEmployee);
 
   return (
     <>
@@ -1821,13 +2164,23 @@ function App() {
       {/* <EvalProp /> */}
 
       <div className="button-container">
-        <button className="enter save" onClick={handleSaveKPI}>
+        <button
+          className="enter save"
+          disabled={status !== 'assigned' && true}
+          onClick={() => {
+            handleSaveKPI();
+            setSuccessMessage('Yadda saxlanıldı!');
+          }}
+        >
           Yadda Saxla
         </button>
         {status === 'assigned' && window.asManager && (
           <button
             className="enter send"
-            onClick={() => handleSendKPI(window.wbIds.sendInLeader)}
+            onClick={() => {
+              setOpen(true);
+              setSuccessMessage('Qeydlər işçiyə göndərildi!');
+            }}
           >
             Göndər
           </button>
@@ -1835,7 +2188,10 @@ function App() {
         {!window.asManager && status === 'send by leader' && (
           <button
             className="enter approve"
-            onClick={() => handleSendKPI(window.wbIds.approveInEmployee)}
+            onClick={() => {
+              setOpen(true);
+              setSuccessMessage('Qeydlər rəhbərə göndərildi!');
+            }}
           >
             Göndər
           </button>
@@ -1843,28 +2199,93 @@ function App() {
         {window.asManager && status === 'send by employee' && (
           <button
             className="enter approve"
-            onClick={() => handleSendKPI(window.wbIds.approveInLeader)}
+            onClick={() => {
+              setOpen(true);
+              setSuccessMessage('Dəyərləndirmə nəticələri HR-a gönərildi!');
+              // if (window.asManager) {
+              //   if (
+              //     !checkProperties(kpiHardValue) ||
+              //     !checkProperties(softKPINotesSL) ||
+              //     !checkProperties(softParagraphValue) ||
+              //     hardKPINotesSL.item_13 == '' ||
+              //     hardKPINotesSL.item_23 == '' ||
+              //     hardKPINotesSL.item_33 == '' ||
+              //     hardKPINotesSL.item_43 == '' ||
+              //     hardKPINotesSL.item_53 == '' ||
+              //     hardKPINotesSL.item_63 == '' ||
+              //     hardKPINotesSL.item_73 == ''
+              //   ) {
+              //     setWarning(true);
+              //   } else {
+              //     setWarning(false);
+              //   }
+              // } else {
+              //   if (
+              //     !checkProperties(softKPINotesEmployee) ||
+              //     hardKPINotesEmployee.item_13 == '' ||
+              //     hardKPINotesEmployee.item_23 == '' ||
+              //     hardKPINotesEmployee.item_33 == '' ||
+              //     hardKPINotesEmployee.item_43 == '' ||
+              //     hardKPINotesEmployee.item_53 == '' ||
+              //     hardKPINotesEmployee.item_63 == '' ||
+              //     hardKPINotesEmployee.item_73 == ''
+              //   ) {
+              //     setWarning(true);
+              //   } else {
+              //     setWarning(false);
+              //   }
+              // }
+
+              // handleSendKPI(window.wbIds.approveInLeader)
+            }}
           >
             Təsdiq Et
           </button>
         )}
       </div>
 
-      <AlertDialog
-        open={open}
-        error={error}
-        loading={loading}
-        success={success}
-        handleClose={() => setOpen(false)}
-      />
-      <AgreementAlert
-        open={showAgreementAlert}
-        handleClose={() => {
-          setShowAgreementAlert(false);
-          localStorage.setItem('firstTime', '1');
-          setFirstTime(1);
-        }}
-      />
+      <ThemeProvider theme={theme}>
+        <GlobalStyles
+          styles={{
+            '@keyframes mui-auto-fill': {
+              from: { display: 'block' },
+            },
+            '@keyframes mui-auto-fill-cancel': {
+              from: { display: 'block' },
+            },
+          }}
+        />
+
+        <AlertDialog
+          open={open}
+          error={error}
+          loading={loading}
+          success={success}
+          warning={warning}
+          handleSendData={() => {
+            if (status === 'assigned' && window.asManager) {
+              handleSendKPI(window.wbIds.sendInLeader);
+              setUpdateData(prev => !prev);
+            } else if (!window.asManager && status === 'send by leader') {
+              handleSendKPI(window.wbIds.approveInEmployee);
+              setUpdateData(prev => !prev);
+            } else {
+              handleSendKPI(window.wbIds.approveInLeader);
+              setUpdateData(prev => !prev);
+            }
+          }}
+          handleClose={() => setOpen(false)}
+          successMessage={successMessage}
+        />
+        <AgreementAlert
+          open={showAgreementAlert}
+          handleClose={() => {
+            setShowAgreementAlert(false);
+            localStorage.setItem('firstTime', '1');
+            setFirstTime(1);
+          }}
+        />
+      </ThemeProvider>
     </>
   );
 }
