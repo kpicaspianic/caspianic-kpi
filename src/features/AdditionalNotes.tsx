@@ -1,7 +1,7 @@
 import { Radio } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 
-export default function AdditionalNotes() {
+export default function AdditionalNotes({ status }) {
   return (
     <div className="additional-notes">
       <div className="additional-notes--detail">
@@ -14,7 +14,9 @@ export default function AdditionalNotes() {
               ? 'additional-notes--input'
               : 'additional-notes--input not-allowed'
           }
-          disabled={!window.asManager ? false : true}
+          disabled={
+            !window.asManager && status === 'send by leader' ? false : true
+          }
         >
           <Radio
             type="checkbox"

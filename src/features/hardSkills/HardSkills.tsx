@@ -12,6 +12,7 @@ export default function HardSkills({
   setHardKPINotesEmployee,
   kpiNotesEmployee,
   kpiNotesSL,
+  status,
 }) {
   const [paragraphValue, setParagraphValue] = useState({
     item_1: '',
@@ -103,8 +104,6 @@ export default function HardSkills({
       setCorrectParagraph(kpiHardValue[el], Number(idx));
     }
   }, [kpiHardValue]);
-
-  // console.log(kpiNotesEmployee);
 
   return (
     <table className="mainTable-hard marginBottom">
@@ -202,7 +201,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               id="select--id"
               options={options}
@@ -287,7 +290,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               options={options}
               id="select--id"
@@ -365,7 +372,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               options={options}
               id="select--id"
@@ -443,7 +454,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               options={options}
               id="select--id"
@@ -521,7 +536,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               options={options}
               id="select--id"
@@ -600,7 +619,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               options={options}
               id="select--id"
@@ -678,7 +701,11 @@ export default function HardSkills({
               </div>
             </div>
           </td>
-          <td className="data data--content">
+          <td
+            className={`data data--content ${
+              status === 'assigned' && !window.asManager && 'displayNone'
+            }`}
+          >
             <Select
               options={options}
               id="select--id"
