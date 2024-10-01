@@ -83,6 +83,7 @@ export const SelectCriteria = ({
         className="select-antd"
         options={options}
         disabled={disabled}
+        value={res}
         onChange={value => handleSoftParagraph(value, number)}
         id={number}
       />

@@ -1,7 +1,13 @@
 import { Radio } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 
-export default function AdditionalNotes({ status }) {
+export default function AdditionalNotes({
+  status,
+  setReviewE,
+  setNoteE,
+  setNoteL,
+  setNoteHR,
+}) {
   return (
     <div className="additional-notes">
       <div className="additional-notes--detail">
@@ -17,6 +23,7 @@ export default function AdditionalNotes({ status }) {
           disabled={
             !window.asManager && status === 'send by leader' ? false : true
           }
+          onChange={e => setReviewE(e.target.value)}
         >
           <Radio
             type="checkbox"
@@ -48,6 +55,7 @@ export default function AdditionalNotes({ status }) {
           name=""
           id=""
           readOnly={!window.asManager ? false : true}
+          onChange={e => setNoteE(e.target.value)}
           className={
             !window.asManager
               ? 'additional-notes--input'
@@ -65,6 +73,7 @@ export default function AdditionalNotes({ status }) {
           name=""
           id="leader-review"
           readOnly={window.asManager ? false : true}
+          onChange={e => setNoteL(e.target.value)}
           className={
             window.asManager
               ? 'additional-notes--input'
@@ -80,6 +89,7 @@ export default function AdditionalNotes({ status }) {
           size="large"
           autoSize={{ minRows: 3 }}
           readOnly={window.currentRole === 'HR' ? false : true}
+          onChange={e => setNoteHR(e.target.value)}
           name=""
           id="hr-review"
           className={

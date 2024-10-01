@@ -218,6 +218,10 @@ function App() {
     item_72: '',
     item_73: '',
   });
+  const [reviewE, setReviewE] = useState('');
+  const [noteE, setNoteE] = useState('');
+  const [noteL, setNoteL] = useState('');
+  const [noteHR, setNoteHR] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -228,12 +232,12 @@ function App() {
 
   const evaluatedId = userIdsFromURL();
 
-  // function checkProperties(obj) {
-  //   for (const key in obj) {
-  //     if (obj[key] == '') return false;
-  //   }
-  //   return true;
-  // }
+  function checkProperties(obj) {
+    for (const key in obj) {
+      if (obj[key] == '' || obj[key] === '0') return false;
+    }
+    return true;
+  }
 
   const sendData = async (status: string) => {
     const evaluatorId = evaluatorInfo.id;
@@ -401,56 +405,131 @@ function App() {
     form.append('soft5input3_multiline', softSkillsData.soft5_input3);
     form.append('soft5input4_multiline', softSkillsData.soft5_input4);
     form.append('soft5input5_multiline', softSkillsData.soft5_input5);
-    form.append('soft1input1', softKPINotesSL.item_11);
-    form.append('soft1input2', softKPINotesSL.item_12);
-    form.append('soft1input3', softKPINotesSL.item_13);
-    form.append('soft1input4', softKPINotesSL.item_14);
-    form.append('soft1input5', softKPINotesSL.item_15);
-    form.append('soft2input1', softKPINotesSL.item_21);
-    form.append('soft2input2', softKPINotesSL.item_22);
-    form.append('soft2input3', softKPINotesSL.item_23);
-    form.append('soft2input4', softKPINotesSL.item_24);
-    form.append('soft2input5', softKPINotesSL.item_25);
-    form.append('soft3input1', softKPINotesSL.item_31);
-    form.append('soft3input2', softKPINotesSL.item_32);
-    form.append('soft3input3', softKPINotesSL.item_33);
-    form.append('soft3input4', softKPINotesSL.item_34);
-    form.append('soft3input5', softKPINotesSL.item_35);
-    form.append('soft4input1', softKPINotesSL.item_41);
-    form.append('soft4input2', softKPINotesSL.item_42);
-    form.append('soft4input3', softKPINotesSL.item_43);
-    form.append('soft4input4', softKPINotesSL.item_44);
-    form.append('soft4input5', softKPINotesSL.item_45);
-    form.append('soft5input1', softKPINotesSL.item_51);
-    form.append('soft5input2', softKPINotesSL.item_52);
-    form.append('soft5input3', softKPINotesSL.item_53);
-    form.append('soft5input4', softKPINotesSL.item_54);
-    form.append('soft5input5', softKPINotesSL.item_55);
-    form.append('soft1input1empl', softKPINotesEmployee.item_11);
-    form.append('soft1input2empl', softKPINotesEmployee.item_12);
-    form.append('soft1input3empl', softKPINotesEmployee.item_13);
-    form.append('soft1input4empl', softKPINotesEmployee.item_14);
-    form.append('soft1input5empl', softKPINotesEmployee.item_15);
-    form.append('soft2input1empl', softKPINotesEmployee.item_21);
-    form.append('soft2input2empl', softKPINotesEmployee.item_22);
-    form.append('soft2input3empl', softKPINotesEmployee.item_23);
-    form.append('soft2input4empl', softKPINotesEmployee.item_24);
-    form.append('soft2input5empl', softKPINotesEmployee.item_25);
-    form.append('soft3input1empl', softKPINotesEmployee.item_31);
-    form.append('soft3input2empl', softKPINotesEmployee.item_32);
-    form.append('soft3input3empl', softKPINotesEmployee.item_33);
-    form.append('soft3input4empl', softKPINotesEmployee.item_34);
-    form.append('soft3input5empl', softKPINotesEmployee.item_35);
-    form.append('soft4input1empl', softKPINotesEmployee.item_41);
-    form.append('soft4input2empl', softKPINotesEmployee.item_42);
-    form.append('soft4input3empl', softKPINotesEmployee.item_43);
-    form.append('soft4input4empl', softKPINotesEmployee.item_44);
-    form.append('soft4input5empl', softKPINotesEmployee.item_45);
-    form.append('soft5input1empl', softKPINotesEmployee.item_51);
-    form.append('soft5input2empl', softKPINotesEmployee.item_52);
-    form.append('soft5input3empl', softKPINotesEmployee.item_53);
-    form.append('soft5input4empl', softKPINotesEmployee.item_54);
-    form.append('soft5input5empl', softKPINotesEmployee.item_55);
+    form.append('soft1input1', encodeURIComponent(softKPINotesSL.item_11));
+    form.append('soft1input2', encodeURIComponent(softKPINotesSL.item_12));
+    form.append('soft1input3', encodeURIComponent(softKPINotesSL.item_13));
+    form.append('soft1input4', encodeURIComponent(softKPINotesSL.item_14));
+    form.append('soft1input5', encodeURIComponent(softKPINotesSL.item_15));
+    form.append('soft2input1', encodeURIComponent(softKPINotesSL.item_21));
+    form.append('soft2input2', encodeURIComponent(softKPINotesSL.item_22));
+    form.append('soft2input3', encodeURIComponent(softKPINotesSL.item_23));
+    form.append('soft2input4', encodeURIComponent(softKPINotesSL.item_24));
+    form.append('soft2input5', encodeURIComponent(softKPINotesSL.item_25));
+    form.append('soft3input1', encodeURIComponent(softKPINotesSL.item_31));
+    form.append('soft3input2', encodeURIComponent(softKPINotesSL.item_32));
+    form.append('soft3input3', encodeURIComponent(softKPINotesSL.item_33));
+    form.append('soft3input4', encodeURIComponent(softKPINotesSL.item_34));
+    form.append('soft3input5', encodeURIComponent(softKPINotesSL.item_35));
+    form.append('soft4input1', encodeURIComponent(softKPINotesSL.item_41));
+    form.append('soft4input2', encodeURIComponent(softKPINotesSL.item_42));
+    form.append('soft4input3', encodeURIComponent(softKPINotesSL.item_43));
+    form.append('soft4input4', encodeURIComponent(softKPINotesSL.item_44));
+    form.append('soft4input5', encodeURIComponent(softKPINotesSL.item_45));
+    form.append('soft5input1', encodeURIComponent(softKPINotesSL.item_51));
+    form.append('soft5input2', encodeURIComponent(softKPINotesSL.item_52));
+    form.append('soft5input3', encodeURIComponent(softKPINotesSL.item_53));
+    form.append('soft5input4', encodeURIComponent(softKPINotesSL.item_54));
+    form.append('soft5input5', encodeURIComponent(softKPINotesSL.item_55));
+    form.append(
+      'soft1input1empl',
+      encodeURIComponent(softKPINotesEmployee.item_11)
+    );
+    form.append(
+      'soft1input2empl',
+      encodeURIComponent(softKPINotesEmployee.item_12)
+    );
+    form.append(
+      'soft1input3empl',
+      encodeURIComponent(softKPINotesEmployee.item_13)
+    );
+    form.append(
+      'soft1input4empl',
+      encodeURIComponent(softKPINotesEmployee.item_14)
+    );
+    form.append(
+      'soft1input5empl',
+      encodeURIComponent(softKPINotesEmployee.item_15)
+    );
+    form.append(
+      'soft2input1empl',
+      encodeURIComponent(softKPINotesEmployee.item_21)
+    );
+    form.append(
+      'soft2input2empl',
+      encodeURIComponent(softKPINotesEmployee.item_22)
+    );
+    form.append(
+      'soft2input3empl',
+      encodeURIComponent(softKPINotesEmployee.item_23)
+    );
+    form.append(
+      'soft2input4empl',
+      encodeURIComponent(softKPINotesEmployee.item_24)
+    );
+    form.append(
+      'soft2input5empl',
+      encodeURIComponent(softKPINotesEmployee.item_25)
+    );
+    form.append(
+      'soft3input1empl',
+      encodeURIComponent(softKPINotesEmployee.item_31)
+    );
+    form.append(
+      'soft3input2empl',
+      encodeURIComponent(softKPINotesEmployee.item_32)
+    );
+    form.append(
+      'soft3input3empl',
+      encodeURIComponent(softKPINotesEmployee.item_33)
+    );
+    form.append(
+      'soft3input4empl',
+      encodeURIComponent(softKPINotesEmployee.item_34)
+    );
+    form.append(
+      'soft3input5empl',
+      encodeURIComponent(softKPINotesEmployee.item_35)
+    );
+    form.append(
+      'soft4input1empl',
+      encodeURIComponent(softKPINotesEmployee.item_41)
+    );
+    form.append(
+      'soft4input2empl',
+      encodeURIComponent(softKPINotesEmployee.item_42)
+    );
+    form.append(
+      'soft4input3empl',
+      encodeURIComponent(softKPINotesEmployee.item_43)
+    );
+    form.append(
+      'soft4input4empl',
+      encodeURIComponent(softKPINotesEmployee.item_44)
+    );
+    form.append(
+      'soft4input5empl',
+      encodeURIComponent(softKPINotesEmployee.item_45)
+    );
+    form.append(
+      'soft5input1empl',
+      encodeURIComponent(softKPINotesEmployee.item_51)
+    );
+    form.append(
+      'soft5input2empl',
+      encodeURIComponent(softKPINotesEmployee.item_52)
+    );
+    form.append(
+      'soft5input3empl',
+      encodeURIComponent(softKPINotesEmployee.item_53)
+    );
+    form.append(
+      'soft5input4empl',
+      encodeURIComponent(softKPINotesEmployee.item_54)
+    );
+    form.append(
+      'soft5input5empl',
+      encodeURIComponent(softKPINotesEmployee.item_55)
+    );
     form.append('evaluated', evaluatedId);
     form.append('evaluator', evaluatorId);
     form.append('enterdate', formattedCurrentDate);
@@ -545,6 +624,10 @@ function App() {
         'resh7',
         encryptText(import.meta.env.VITE_PASSWORD, kpiHardValue.value_7)
       );
+    form2.append('reviewe', reviewE);
+    form2.append('notee', encodeURIComponent(noteE));
+    form2.append('notel', encodeURIComponent(noteL));
+    form2.append('notehr', encodeURIComponent(noteHR));
     form2.append('firsttime', String(firstTime));
     form2.append('nexturl', window.nextUrl);
 
@@ -626,7 +709,10 @@ function App() {
   const consoleSomething = () => {
     // console.log(kpiHardValue);
     // console.log(hardKPINotesSL)
-    console.log(hardKPINotesEmployee);
+    console.log(reviewE);
+    console.log(noteE);
+    console.log(noteL);
+    console.log(noteHR);
   };
 
   const handleSaveKPI = () => {
@@ -930,214 +1016,214 @@ function App() {
 
         setSoftKPINotesSL({
           item_11:
-            data.result[0].noteItem_11 !== '?'
-              ? data.result[0].noteItem_11
+            decodeURIComponent(data.result[0].noteItem_11) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_11)
               : '',
           item_12:
-            data.result[0].noteItem_12 !== '?'
-              ? data.result[0].noteItem_12
+            decodeURIComponent(data.result[0].noteItem_12) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_12)
               : '',
           item_13:
-            data.result[0].noteItem_13 !== '?'
-              ? data.result[0].noteItem_13
+            decodeURIComponent(data.result[0].noteItem_13) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_13)
               : '',
           item_14:
-            data.result[0].noteItem_14 !== '?'
-              ? data.result[0].noteItem_14
+            decodeURIComponent(data.result[0].noteItem_14) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_14)
               : '',
           item_15:
-            data.result[0].noteItem_15 !== '?'
-              ? data.result[0].noteItem_15
+            decodeURIComponent(data.result[0].noteItem_15) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_15)
               : '',
 
           item_21:
-            data.result[0].noteItem_21 !== '?'
-              ? data.result[0].noteItem_21
+            decodeURIComponent(data.result[0].noteItem_21) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_21)
               : '',
           item_22:
-            data.result[0].noteItem_22 !== '?'
-              ? data.result[0].noteItem_22
+            decodeURIComponent(data.result[0].noteItem_22) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_22)
               : '',
           item_23:
-            data.result[0].noteItem_23 !== '?'
-              ? data.result[0].noteItem_23
+            decodeURIComponent(data.result[0].noteItem_23) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_23)
               : '',
           item_24:
-            data.result[0].noteItem_24 !== '?'
-              ? data.result[0].noteItem_24
+            decodeURIComponent(data.result[0].noteItem_24) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_24)
               : '',
           item_25:
-            data.result[0].noteItem_25 !== '?'
-              ? data.result[0].noteItem_25
+            decodeURIComponent(data.result[0].noteItem_25) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_25)
               : '',
 
           item_31:
-            data.result[0].noteItem_31 !== '?'
-              ? data.result[0].noteItem_31
+            decodeURIComponent(data.result[0].noteItem_31) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_31)
               : '',
           item_32:
-            data.result[0].noteItem_32 !== '?'
-              ? data.result[0].noteItem_32
+            decodeURIComponent(data.result[0].noteItem_32) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_32)
               : '',
           item_33:
-            data.result[0].noteItem_33 !== '?'
-              ? data.result[0].noteItem_33
+            decodeURIComponent(data.result[0].noteItem_33) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_33)
               : '',
           item_34:
-            data.result[0].noteItem_34 !== '?'
-              ? data.result[0].noteItem_34
+            decodeURIComponent(data.result[0].noteItem_34) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_34)
               : '',
           item_35:
-            data.result[0].noteItem_35 !== '?'
-              ? data.result[0].noteItem_35
+            decodeURIComponent(data.result[0].noteItem_35) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_35)
               : '',
 
           item_41:
-            data.result[0].noteItem_41 !== '?'
-              ? data.result[0].noteItem_41
+            decodeURIComponent(data.result[0].noteItem_41) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_41)
               : '',
           item_42:
-            data.result[0].noteItem_42 !== '?'
-              ? data.result[0].noteItem_42
+            decodeURIComponent(data.result[0].noteItem_42) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_42)
               : '',
           item_43:
-            data.result[0].noteItem_43 !== '?'
-              ? data.result[0].noteItem_43
+            decodeURIComponent(data.result[0].noteItem_43) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_43)
               : '',
           item_44:
-            data.result[0].noteItem_44 !== '?'
-              ? data.result[0].noteItem_44
+            decodeURIComponent(data.result[0].noteItem_44) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_44)
               : '',
           item_45:
-            data.result[0].noteItem_45 !== '?'
-              ? data.result[0].noteItem_45
+            decodeURIComponent(data.result[0].noteItem_45) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_45)
               : '',
 
           item_51:
-            data.result[0].noteItem_51 !== '?'
-              ? data.result[0].noteItem_51
+            decodeURIComponent(data.result[0].noteItem_51) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_51)
               : '',
           item_52:
-            data.result[0].noteItem_52 !== '?'
-              ? data.result[0].noteItem_52
+            decodeURIComponent(data.result[0].noteItem_52) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_52)
               : '',
           item_53:
-            data.result[0].noteItem_53 !== '?'
-              ? data.result[0].noteItem_53
+            decodeURIComponent(data.result[0].noteItem_53) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_53)
               : '',
           item_54:
-            data.result[0].noteItem_54 !== '?'
-              ? data.result[0].noteItem_54
+            decodeURIComponent(data.result[0].noteItem_54) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_54)
               : '',
           item_55:
-            data.result[0].noteItem_55 !== '?'
-              ? data.result[0].noteItem_55
+            decodeURIComponent(data.result[0].noteItem_55) !== '?'
+              ? decodeURIComponent(data.result[0].noteItem_55)
               : '',
         });
         setSoftKPINotesEmployee({
           item_11:
-            data.result[0].noteItemEmpl_11 !== '?'
-              ? data.result[0].noteItemEmpl_11
+            decodeURIComponent(data.result[0].noteItemEmpl_11) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_11)
               : '',
           item_12:
-            data.result[0].noteItemEmpl_12 !== '?'
-              ? data.result[0].noteItemEmpl_12
+            decodeURIComponent(data.result[0].noteItemEmpl_12) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_12)
               : '',
           item_13:
-            data.result[0].noteItemEmpl_13 !== '?'
-              ? data.result[0].noteItemEmpl_13
+            decodeURIComponent(data.result[0].noteItemEmpl_13) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_13)
               : '',
           item_14:
-            data.result[0].noteItemEmpl_14 !== '?'
-              ? data.result[0].noteItemEmpl_14
+            decodeURIComponent(data.result[0].noteItemEmpl_14) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_14)
               : '',
           item_15:
-            data.result[0].noteItemEmpl_15 !== '?'
-              ? data.result[0].noteItemEmpl_15
+            decodeURIComponent(data.result[0].noteItemEmpl_15) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_15)
               : '',
 
           item_21:
-            data.result[0].noteItemEmpl_21 !== '?'
-              ? data.result[0].noteItemEmpl_21
+            decodeURIComponent(data.result[0].noteItemEmpl_21) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_21)
               : '',
           item_22:
-            data.result[0].noteItemEmpl_22 !== '?'
-              ? data.result[0].noteItemEmpl_22
+            decodeURIComponent(data.result[0].noteItemEmpl_22) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_22)
               : '',
           item_23:
-            data.result[0].noteItemEmpl_23 !== '?'
-              ? data.result[0].noteItemEmpl_23
+            decodeURIComponent(data.result[0].noteItemEmpl_23) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_23)
               : '',
           item_24:
-            data.result[0].noteItemEmpl_24 !== '?'
-              ? data.result[0].noteItemEmpl_24
+            decodeURIComponent(data.result[0].noteItemEmpl_24) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_24)
               : '',
           item_25:
-            data.result[0].noteItemEmpl_25 !== '?'
-              ? data.result[0].noteItemEmpl_25
+            decodeURIComponent(data.result[0].noteItemEmpl_25) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_25)
               : '',
 
           item_31:
-            data.result[0].noteItemEmpl_31 !== '?'
-              ? data.result[0].noteItemEmpl_31
+            decodeURIComponent(data.result[0].noteItemEmpl_31) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_31)
               : '',
           item_32:
-            data.result[0].noteItemEmpl_32 !== '?'
-              ? data.result[0].noteItemEmpl_32
+            decodeURIComponent(data.result[0].noteItemEmpl_32) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_32)
               : '',
           item_33:
-            data.result[0].noteItemEmpl_33 !== '?'
-              ? data.result[0].noteItemEmpl_33
+            decodeURIComponent(data.result[0].noteItemEmpl_33) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_33)
               : '',
           item_34:
-            data.result[0].noteItemEmpl_34 !== '?'
-              ? data.result[0].noteItemEmpl_34
+            decodeURIComponent(data.result[0].noteItemEmpl_34) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_34)
               : '',
           item_35:
-            data.result[0].noteItemEmpl_35 !== '?'
-              ? data.result[0].noteItemEmpl_35
+            decodeURIComponent(data.result[0].noteItemEmpl_35) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_35)
               : '',
 
           item_41:
-            data.result[0].noteItemEmpl_41 !== '?'
-              ? data.result[0].noteItemEmpl_41
+            decodeURIComponent(data.result[0].noteItemEmpl_41) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_41)
               : '',
           item_42:
-            data.result[0].noteItemEmpl_42 !== '?'
-              ? data.result[0].noteItemEmpl_42
+            decodeURIComponent(data.result[0].noteItemEmpl_42) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_42)
               : '',
           item_43:
-            data.result[0].noteItemEmpl_43 !== '?'
-              ? data.result[0].noteItemEmpl_43
+            decodeURIComponent(data.result[0].noteItemEmpl_43) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_43)
               : '',
           item_44:
-            data.result[0].noteItemEmpl_44 !== '?'
-              ? data.result[0].noteItemEmpl_44
+            decodeURIComponent(data.result[0].noteItemEmpl_44) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_44)
               : '',
           item_45:
-            data.result[0].noteItemEmpl_45 !== '?'
-              ? data.result[0].noteItemEmpl_45
+            decodeURIComponent(data.result[0].noteItemEmpl_45) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_45)
               : '',
 
           item_51:
-            data.result[0].noteItemEmpl_51 !== '?'
-              ? data.result[0].noteItemEmpl_51
+            decodeURIComponent(data.result[0].noteItemEmpl_51) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_51)
               : '',
           item_52:
-            data.result[0].noteItemEmpl_52 !== '?'
-              ? data.result[0].noteItemEmpl_52
+            decodeURIComponent(data.result[0].noteItemEmpl_52) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_52)
               : '',
           item_53:
-            data.result[0].noteItemEmpl_53 !== '?'
-              ? data.result[0].noteItemEmpl_53
+            decodeURIComponent(data.result[0].noteItemEmpl_53) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_53)
               : '',
           item_54:
-            data.result[0].noteItemEmpl_54 !== '?'
-              ? data.result[0].noteItemEmpl_54
+            decodeURIComponent(data.result[0].noteItemEmpl_54) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_54)
               : '',
           item_55:
-            data.result[0].noteItemEmpl_55 !== '?'
-              ? data.result[0].noteItemEmpl_55
+            decodeURIComponent(data.result[0].noteItemEmpl_55) !== '?'
+              ? decodeURIComponent(data.result[0].noteItemEmpl_55)
               : '',
         });
 
@@ -1265,6 +1351,23 @@ function App() {
           title: data.result[0].evaluatorTitle,
         });
 
+        setReviewE(data.result[0].reviewE);
+        setNoteE(
+          decodeURIComponent(data.result[0].noteE) !== '?'
+            ? decodeURIComponent(data.result[0].noteE)
+            : ''
+        );
+        setNoteL(
+          decodeURIComponent(data.result[0].noteL) !== '?'
+            ? decodeURIComponent(data.result[0].noteL)
+            : ''
+        );
+        setNoteHR(
+          decodeURIComponent(data.result[0].noteHR) !== '?'
+            ? decodeURIComponent(data.result[0].noteHR)
+            : ''
+        );
+
         const first = localStorage.getItem('firstTime');
         if (first !== '1' && window.checkFirst === true) {
           setShowAgreementAlert(true);
@@ -1324,11 +1427,18 @@ function App() {
         kpiNotesSL={hardKPINotesSL}
         status={kpiStatus}
       />
-      <AdditionalNotes status={kpiStatus} />
+      <AdditionalNotes
+        status={kpiStatus}
+        setReviewE={setReviewE}
+        setNoteE={setNoteE}
+        setNoteL={setNoteL}
+        setNoteHR={setNoteHR}
+      />
       <QualityEvaluation />
       {/* <EvalProp /> */}
 
       <div className="button-container">
+        <button onClick={() => consoleSomething()}>Consolidate</button>
         <button
           className="enter save"
           disabled={kpiStatus !== 'assigned' && true}
@@ -1345,6 +1455,22 @@ function App() {
             onClick={() => {
               setOpen(true);
               setSuccessMessage('Qeydlər işçiyə göndərildi!');
+              if (
+                !checkProperties(kpiHardValue) ||
+                !checkProperties(softKPINotesSL) ||
+                !checkProperties(softParagraphValue) ||
+                hardKPINotesSL.item_13 == '' ||
+                hardKPINotesSL.item_23 == '' ||
+                hardKPINotesSL.item_33 == '' ||
+                hardKPINotesSL.item_43 == '' ||
+                hardKPINotesSL.item_53 == '' ||
+                hardKPINotesSL.item_63 == '' ||
+                hardKPINotesSL.item_73 == ''
+              ) {
+                setWarning(true);
+              } else {
+                setWarning(false);
+              }
             }}
           >
             Göndər
@@ -1355,7 +1481,23 @@ function App() {
             className="enter approve"
             onClick={() => {
               setOpen(true);
-              setSuccessMessage('Qeydlər rəhbərə göndərildi!');
+              setSuccessMessage('Məlumatlar göndərildi!');
+              if (
+                !checkProperties(kpiHardValue) ||
+                !checkProperties(softKPINotesSL) ||
+                !checkProperties(softParagraphValue) ||
+                hardKPINotesSL.item_13 == '' ||
+                hardKPINotesSL.item_23 == '' ||
+                hardKPINotesSL.item_33 == '' ||
+                hardKPINotesSL.item_43 == '' ||
+                hardKPINotesSL.item_53 == '' ||
+                hardKPINotesSL.item_63 == '' ||
+                hardKPINotesSL.item_73 == ''
+              ) {
+                setWarning(true);
+              } else {
+                setWarning(false);
+              }
             }}
           >
             Göndər
