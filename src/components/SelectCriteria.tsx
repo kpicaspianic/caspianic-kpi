@@ -6,6 +6,7 @@ type SelectCriteriaProps = {
   number: string;
   setParagraph: React.Dispatch<React.SetStateAction<object>>;
   disabled: boolean;
+  open?: boolean;
 };
 
 export const SelectCriteria = ({
@@ -13,6 +14,7 @@ export const SelectCriteria = ({
   number,
   setParagraph,
   disabled,
+  open,
 }: SelectCriteriaProps) => {
   const setCorrectParagraph = (value: string) => {
     switch (value) {
@@ -86,6 +88,7 @@ export const SelectCriteria = ({
         value={res}
         onChange={value => handleSoftParagraph(value, number)}
         id={number}
+        open={open}
       />
       <p className="data--paragraph-1 data--paragraph">{paragraphValue}</p>
     </div>

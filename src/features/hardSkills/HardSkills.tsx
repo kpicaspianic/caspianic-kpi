@@ -193,7 +193,9 @@ export default function HardSkills({
                   onChange={e => handleKPINotesSL(e.target.value, 13)}
                   id="leader-hardSkill--13"
                   autoSize={{ minRows: 9 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -212,6 +214,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_1}
               onChange={value => handleSoftParagraph(value, 1)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
               // className="select--criteria-hard select--criteria-hard-1 select--criteria-hard-11"
             />
@@ -282,7 +285,9 @@ export default function HardSkills({
                   name=""
                   id="leader-hardSkill--23"
                   autoSize={{ minRows: 8 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -301,6 +306,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_2}
               onChange={value => handleSoftParagraph(value, 2)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
             />
             <p className="data--paragraph-hard">{paragraphValue.item_2}</p>
@@ -364,7 +370,9 @@ export default function HardSkills({
                   onChange={e => handleKPINotesSL(e.target.value, 33)}
                   id="leader-hardSkill--33"
                   autoSize={{ minRows: 8 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -383,6 +391,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_3}
               onChange={value => handleSoftParagraph(value, 3)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
             />
             <p className="data--paragraph-hard">{paragraphValue.item_3}</p>
@@ -446,7 +455,9 @@ export default function HardSkills({
                   onChange={e => handleKPINotesSL(e.target.value, 43)}
                   id="leader-hardSkill--43"
                   autoSize={{ minRows: 8 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -465,6 +476,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_4}
               onChange={value => handleSoftParagraph(value, 4)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
             />
             <p className="data--paragraph-hard">{paragraphValue.item_4}</p>
@@ -528,7 +540,9 @@ export default function HardSkills({
                   onChange={e => handleKPINotesSL(e.target.value, 53)}
                   id="leader-hardSkill--53"
                   autoSize={{ minRows: 8 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -547,6 +561,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_5}
               onChange={value => handleSoftParagraph(value, 5)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
             />
 
@@ -611,7 +626,9 @@ export default function HardSkills({
                   onChange={e => handleKPINotesSL(e.target.value, 63)}
                   id="leader-hardSkill-63"
                   autoSize={{ minRows: 8 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -630,6 +647,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_6}
               onChange={value => handleSoftParagraph(value, 6)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
             />
             <p className="data--paragraph-hard">{paragraphValue.item_6}</p>
@@ -693,7 +711,9 @@ export default function HardSkills({
                   onChange={e => handleKPINotesSL(e.target.value, 73)}
                   id="leader-hardSkill--73"
                   autoSize={{ minRows: 8 }}
-                  readOnly={!window.asManager ? true : false}
+                  readOnly={
+                    status !== 'assigned' || !window.asManager ? true : false
+                  }
                   className={
                     !window.asManager ? 'not-allowed textarea' : 'textarea'
                   }
@@ -712,6 +732,7 @@ export default function HardSkills({
               disabled={!window.asManager}
               value={kpiHardValue.value_7}
               onChange={value => handleSoftParagraph(value, 7)}
+              open={status !== 'assigned' ? false : undefined}
               className="select--criteria-hard select-antd"
             />
             <p className="data--paragraph-hard">{paragraphValue.item_7}</p>

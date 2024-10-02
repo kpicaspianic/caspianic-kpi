@@ -995,3 +995,15 @@ td {
 .displayNone {
   display: none;
 }
+
+.ant-radio-wrapper-disabled {
+  color: #6e6e6e;
+}
+
+.ant-select-selection-item {
+  color: #6e6e6e;
+}
+
+.ant-select-outlined.ant-select-disabled .ant-select-selector {
+  color: #6e6e6e;
+}

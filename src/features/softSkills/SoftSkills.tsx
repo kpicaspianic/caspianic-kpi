@@ -605,7 +605,11 @@ const SoftSkills = ({
                           }));
                         }}
                         value={el.slNote[`item_${idx + 1}1`]}
-                        readOnly={!window.asManager ? true : false}
+                        readOnly={
+                          status !== 'assigned' || !window.asManager
+                            ? true
+                            : false
+                        }
                         className={
                           !window.asManager
                             ? 'not-allowed textarea-antd'
@@ -628,6 +632,7 @@ const SoftSkills = ({
                       number={`${idx + 1}1`}
                       res={el.results[`res_${idx + 1}1`]}
                       disabled={!window.asManager}
+                      open={status !== 'assigned' ? false : undefined}
                     />
                   </td>
                 </tr>
@@ -666,7 +671,11 @@ const SoftSkills = ({
                           }));
                         }}
                         value={el.slNote[`item_${idx + 1}2`]}
-                        readOnly={!window.asManager ? true : false}
+                        readOnly={
+                          status !== 'assigned' || !window.asManager
+                            ? true
+                            : false
+                        }
                         className={
                           !window.asManager
                             ? 'not-allowed textarea-antd'
@@ -690,6 +699,7 @@ const SoftSkills = ({
                         number={`${idx + 1}2`}
                         res={el.results[`res_${idx + 1}2`]}
                         disabled={!window.asManager}
+                        open={status !== 'assigned' ? false : undefined}
                       />
                     </div>
                   </td>
@@ -729,7 +739,11 @@ const SoftSkills = ({
                           }));
                         }}
                         value={el.slNote[`item_${idx + 1}3`]}
-                        readOnly={!window.asManager ? true : false}
+                        readOnly={
+                          status !== 'assigned' || !window.asManager
+                            ? true
+                            : false
+                        }
                         className={
                           !window.asManager
                             ? 'not-allowed textarea-antd'
@@ -753,6 +767,7 @@ const SoftSkills = ({
                         number={`${idx + 1}3`}
                         res={el.results[`res_${idx + 1}3`]}
                         disabled={!window.asManager}
+                        open={status !== 'assigned' ? false : undefined}
                       />
                     </div>
                   </td>
@@ -792,7 +807,11 @@ const SoftSkills = ({
                           }));
                         }}
                         value={el.slNote[`item_${idx + 1}4`]}
-                        readOnly={!window.asManager ? true : false}
+                        readOnly={
+                          status !== 'assigned' || !window.asManager
+                            ? true
+                            : false
+                        }
                         className={
                           !window.asManager
                             ? 'not-allowed textarea-antd'
@@ -816,6 +835,7 @@ const SoftSkills = ({
                         number={`${idx + 1}4`}
                         res={el.results[`res_${idx + 1}4`]}
                         disabled={!window.asManager}
+                        open={status !== 'assigned' ? false : undefined}
                       />
                     </div>
                   </td>
@@ -855,7 +875,11 @@ const SoftSkills = ({
                           }));
                         }}
                         value={el.slNote[`item_${idx + 1}5`]}
-                        readOnly={!window.asManager ? true : false}
+                        readOnly={
+                          status !== 'assigned' || !window.asManager
+                            ? true
+                            : false
+                        }
                         className={
                           !window.asManager
                             ? 'not-allowed textarea-antd'
@@ -879,6 +903,7 @@ const SoftSkills = ({
                         key={el}
                         number={`${idx + 1}5`}
                         res={el.results[`res_${idx + 1}5`]}
+                        open={status !== 'assigned' ? false : undefined}
                       />
                     </div>
                   </td>

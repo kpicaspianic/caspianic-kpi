@@ -7,6 +7,10 @@ export default function AdditionalNotes({
   setNoteE,
   setNoteL,
   setNoteHR,
+  noteE,
+  noteL,
+  noteHR,
+  reviewE,
 }) {
   return (
     <div className="additional-notes">
@@ -24,6 +28,7 @@ export default function AdditionalNotes({
             !window.asManager && status === 'send by leader' ? false : true
           }
           onChange={e => setReviewE(e.target.value)}
+          value={reviewE}
         >
           <Radio
             type="checkbox"
@@ -56,6 +61,7 @@ export default function AdditionalNotes({
           id=""
           readOnly={!window.asManager ? false : true}
           onChange={e => setNoteE(e.target.value)}
+          value={noteE}
           className={
             !window.asManager
               ? 'additional-notes--input'
@@ -74,6 +80,7 @@ export default function AdditionalNotes({
           id="leader-review"
           readOnly={window.asManager ? false : true}
           onChange={e => setNoteL(e.target.value)}
+          value={noteL}
           className={
             window.asManager
               ? 'additional-notes--input'
@@ -90,6 +97,7 @@ export default function AdditionalNotes({
           autoSize={{ minRows: 3 }}
           readOnly={window.currentRole === 'HR' ? false : true}
           onChange={e => setNoteHR(e.target.value)}
+          value={noteHR}
           name=""
           id="hr-review"
           className={

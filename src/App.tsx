@@ -1351,7 +1351,9 @@ function App() {
           title: data.result[0].evaluatorTitle,
         });
 
-        setReviewE(data.result[0].reviewE);
+        setReviewE(
+          data.result[0].reviewE !== '?' ? data.result[0].reviewE : ''
+        );
         setNoteE(
           decodeURIComponent(data.result[0].noteE) !== '?'
             ? decodeURIComponent(data.result[0].noteE)
@@ -1433,12 +1435,16 @@ function App() {
         setNoteE={setNoteE}
         setNoteL={setNoteL}
         setNoteHR={setNoteHR}
+        reviewE={reviewE}
+        noteE={noteE}
+        noteL={noteL}
+        noteHR={noteHR}
       />
       <QualityEvaluation />
       {/* <EvalProp /> */}
 
       <div className="button-container">
-        <button onClick={() => consoleSomething()}>Consolidate</button>
+        {/* <button onClick={() => consoleSomething()}>Consolidate</button> */}
         <button
           className="enter save"
           disabled={kpiStatus !== 'assigned' && true}
@@ -1482,18 +1488,7 @@ function App() {
             onClick={() => {
               setOpen(true);
               setSuccessMessage('Məlumatlar göndərildi!');
-              if (
-                !checkProperties(kpiHardValue) ||
-                !checkProperties(softKPINotesSL) ||
-                !checkProperties(softParagraphValue) ||
-                hardKPINotesSL.item_13 == '' ||
-                hardKPINotesSL.item_23 == '' ||
-                hardKPINotesSL.item_33 == '' ||
-                hardKPINotesSL.item_43 == '' ||
-                hardKPINotesSL.item_53 == '' ||
-                hardKPINotesSL.item_63 == '' ||
-                hardKPINotesSL.item_73 == ''
-              ) {
+              if (reviewE === '' || noteE === '') {
                 setWarning(true);
               } else {
                 setWarning(false);
